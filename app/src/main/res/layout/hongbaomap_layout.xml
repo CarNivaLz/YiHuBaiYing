@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+    <!--导航栏-->
+
+
+    <android.support.design.widget.TabLayout
+
+        android:id="@+id/tabLayout_home_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#2c2c2c"
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/gold"
+        app:tabTextColor="#515151"
+        app:tabGravity="fill"
+        app:tabMaxWidth="0dp"
+        app:tabIndicatorColor="@color/gold"
+
+        app:tabMode="fixed"
+        android:gravity="fill_vertical"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        >
+    </android.support.design.widget.TabLayout>
+
+    <!--&lt;!&ndash;-->
+    <!--app:tabIndicatorHeight="0dp"是为了不显示tab底部的横线-->
+    <!--app:tabMode="fixed"是让底部tab布局不可滑动-->
+    <!--app:tabContentStart="100dp"TabLayout开始位置的偏移量：-->
+    <!--app:tabGravity="center"//居中，如果是fill，则是充满-->
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager_home_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>
