@@ -1,5 +1,7 @@
 package android.example.com.yihubaiying.adapter;
 
+import android.example.com.yihubaiying.fragment.Fragment_HongBaoMap;
+import android.example.com.yihubaiying.fragment.fragment_hongbaomap.Fragment_DongTai;
 import android.example.com.yihubaiying.fragment.fragment_hongbaomap.Fragment_HongBao;
 import android.example.com.yihubaiying.fragment.fragment_hongbaomap.Fragment_PaiHangBang;
 import android.example.com.yihubaiying.fragment.fragment_hongbaomap.Fragment_RenWu;
@@ -25,7 +27,8 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         if (position==0){return new Fragment_HongBao();}
         if (position==1){return new Fragment_XiaoXi();}
         else if (position==2){return new Fragment_RenWu();}
-        else if (position==3){return new Fragment_PaiHangBang();}
+        else if (position==3){return new Fragment_DongTai();}
+        else if (position==4){return new Fragment_PaiHangBang();}
         return new Fragment_HongBao();
     }
 
