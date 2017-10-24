@@ -7,7 +7,9 @@
 
     >
     <!--导航栏-->
-
+<android.support.design.widget.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.design.widget.TabLayout
 
@@ -27,6 +29,8 @@
         app:tabTextAppearance="@style/TabLayoutTextStyle"
         >
     </android.support.design.widget.TabLayout>
+</android.support.design.widget.AppBarLayout>
+
 
     <!--&lt;!&ndash;-->
     <!--app:tabIndicatorHeight="0dp"是为了不显示tab底部的横线-->
@@ -35,13 +39,14 @@
     <!--app:tabGravity="center"//居中，如果是fill，则是充满-->
 
 
-    <android.support.v4.view.ViewPager
+    <android.example.com.yihubaiying.adapter.ScrollViewPager
         android:id="@+id/viewPager_home_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="none">
-    </android.support.v4.view.ViewPager>
+    </android.example.com.yihubaiying.adapter.ScrollViewPager>
+
 
 
 </LinearLayout>

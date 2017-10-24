@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:orientation="vertical"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <com.youth.banner.Banner
-
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:title_height="30dp"/>
+        android:layout_height="120dp">
+
+    </com.youth.banner.Banner>
+    <View
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+    <com.amap.api.maps.TextureMapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    >
 
 </LinearLayout>

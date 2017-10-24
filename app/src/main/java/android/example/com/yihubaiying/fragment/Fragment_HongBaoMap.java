@@ -3,6 +3,7 @@ package android.example.com.yihubaiying.fragment;
 import android.content.res.Resources;
 import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.adapter.MyFragmentPagerAdapter;
+import android.example.com.yihubaiying.adapter.ScrollViewPager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -20,7 +21,7 @@ import android.widget.LinearLayout;
 
 public class Fragment_HongBaoMap extends Fragment implements View.OnClickListener {
     TabLayout mTablayout;
-    ViewPager mViewPager;
+    ScrollViewPager mViewPager;
     private TabLayout.Tab tab_hongbao,tab_dongtai,tab_renwu,tab_xiaoxi,tab_paihangbang;
 
     @Nullable
@@ -38,7 +39,7 @@ public class Fragment_HongBaoMap extends Fragment implements View.OnClickListene
 
 
 
-        mViewPager= (ViewPager) view.findViewById(R.id.viewPager_home_fragment);
+        mViewPager= (ScrollViewPager) view.findViewById(R.id.viewPager_home_fragment);
 //getSupportFragmentManager()方法在Activity中使用
         //        嵌套Fragment拿到FragmentManager要用这个方法 getChildFragmentManager()
 
