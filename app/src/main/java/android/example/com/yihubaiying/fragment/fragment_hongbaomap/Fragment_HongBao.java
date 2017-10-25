@@ -65,8 +65,8 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     private UiSettings uiSettings;
     private MyLocationStyle myLocationStyle;
 
-
-    private Marker markerLocal;
+    private Location myLocation;
+    private boolean isAdded=false;
 
 
     @Nullable
@@ -114,6 +114,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
 
     public void setUpMap(){
         aMap.setMapCustomEnable(true);
+        aMap.setOnMarkerClickListener(this);
         //amp
         myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationIcon(BitmapDescriptorFactory.
@@ -133,6 +134,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
         aMap.setMyLocationEnabled(true);
 
         aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+
     }
     /**
      * 方法必须重写
@@ -164,7 +166,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     @Override
     public void onDestroyView(){
         super.onDestroyView();
-
+        mapView.onDestroy();
 
     }
 
@@ -174,7 +176,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mapView.onDestroy();
+
     }
 
     @Override
@@ -183,7 +185,10 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
         if(location != null) {
             Log.e("amap", "onMyLocationChange 定位成功， lat: " + location.getLatitude() + " lon: " + location.getLongitude());
             Bundle bundle = location.getExtras();
-            addMarkersToMap(location);
+            if(isAdded==false) {
+                addMarkersToMap(location);
+                isAdded=true;
+            }
             if(bundle != null) {
                 int errorCode = bundle.getInt(MyLocationStyle.ERROR_CODE);
                 String errorInfo = bundle.getString(MyLocationStyle.ERROR_INFO);
@@ -268,7 +273,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
      * 对marker标注点点击响应事件
      */
     @Override
-    public boolean onMarkerClick(final Marker marker) {
+    public boolean onMarkerClick( Marker marker) {
         if (aMap != null) {
             jumpPoint(marker);
         }
