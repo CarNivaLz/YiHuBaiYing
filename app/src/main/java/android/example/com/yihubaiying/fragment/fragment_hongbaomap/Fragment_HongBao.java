@@ -3,6 +3,7 @@ package android.example.com.yihubaiying.fragment.fragment_hongbaomap;
 import android.content.Context;
 import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.loader.GlideImageLoader;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.location.Location;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
@@ -45,7 +47,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.view.View.inflate;
 import static com.amap.api.col.sl3.au.b;
+import static com.amap.api.col.sl3.dj.m;
 
 
 /**
@@ -64,7 +68,8 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     private TextureMapView mapView;
     private UiSettings uiSettings;
     private MyLocationStyle myLocationStyle;
-
+    private Bitmap mBitmap;
+    private String NUMBER="88";
     private Location myLocation;
     private boolean isAdded=false;
 
@@ -73,15 +78,27 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag_hongbao,container,false);
+
+
+
+
+        initHongbaoMarker(NUMBER);
         mapView=(TextureMapView)view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         initView(view);
         return view;
     }
-
+public void initHongbaoMarker(String number){
+    LayoutInflater inflater=(LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    View markerView=inflater.inflate(R.layout.marker_redvelet,null);
+    TextView textView =(TextView)markerView.findViewById(R.id.num_hongbao);
+    textView.setText(number);
+    mBitmap=convertViewToBitmap(markerView);
+}
 
     private void initView(View view) {
         initBanner(view);
+
 
         if (aMap == null) {
             aMap = mapView.getMap();
@@ -186,7 +203,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
             Log.e("amap", "onMyLocationChange 定位成功， lat: " + location.getLatitude() + " lon: " + location.getLongitude());
             Bundle bundle = location.getExtras();
             if(isAdded==false) {
-                addMarkersToMap(location);
+                drawMarkerOnMap(location,mBitmap);
                 isAdded=true;
             }
             if(bundle != null) {
@@ -211,15 +228,15 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
         }
     }
 
-    private void addMarkersToMap(Location location){
-        final LatLng mLatLng=new LatLng(location.getLatitude()+0.01,location.getLongitude()+0.01);
-        MarkerOptions markerOptions=new MarkerOptions();
-        markerOptions.draggable(false);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.hongb_icon)))
-                .position(mLatLng);
-        aMap.addMarker(markerOptions);
-
-    }
+//    private void addMarkersToMap(Location location,Bitmap markerIcon){
+//        final LatLng mLatLng=new LatLng(location.getLatitude()+0.01,location.getLongitude()+0.01);
+//        MarkerOptions markerOptions=new MarkerOptions();
+//        markerOptions.draggable(false);
+//        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(markerIcon))
+//                .position(mLatLng);
+//        aMap.addMarker(markerOptions);
+//
+//    }
 //自定义地图
     private void setMapCustomStyleFile(Context context) {
         //草色青mystyle_sdk_1508855865_0100.data
@@ -227,7 +244,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
         //马卡龙mystyle_sdk_1508855841_0100.data
 
         //标准mystyle_sdk_1508856206_0100.data
-        String styleName = "mystyle_sdk_1508856206_0100.data";
+        String styleName = "mystyle_sdk_1508946491_0100.data";
 
 
 
@@ -317,5 +334,42 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
                 }
             }
         });
+    }
+
+
+
+
+
+    private Marker drawMarkerOnMap(Location location, Bitmap markerIcon) {
+        final LatLng point=new LatLng(location.getLatitude()+0.01,location.getLongitude()+0.01);
+
+        if (aMap != null && point != null) {
+
+            Marker marker = aMap.addMarker(new MarkerOptions().anchor(0.5f, 1)
+
+                    .position(point)
+
+                    .icon(BitmapDescriptorFactory.fromBitmap(markerIcon)));
+
+
+
+            return marker;
+
+        }
+
+        return null;
+    }
+    public static Bitmap convertViewToBitmap(View view) {
+
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+
+        view.buildDrawingCache();
+
+        Bitmap bitmap = view.getDrawingCache();
+
+        return bitmap;
+
     }
 }

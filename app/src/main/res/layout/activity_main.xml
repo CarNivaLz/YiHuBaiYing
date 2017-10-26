@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@color/color_statusBar"></LinearLayout>
+        android:background="@color/theme_gray"></LinearLayout>
     <FrameLayout
 
 
@@ -32,6 +32,7 @@
         android:layout_height="50dp"
         android:padding="3dp"
     android:background="@color/color_statusBar"
+        android:elevation="3dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
         <!--<LinearLayout

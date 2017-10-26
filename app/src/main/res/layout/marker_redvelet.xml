@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/acp">
+
+        <TextView
+            android:id="@+id/num_hongbao"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/textview_circle"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="7dp"
+            android:text="99" />
+
+</FrameLayout>
