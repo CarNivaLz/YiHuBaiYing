@@ -6,32 +6,25 @@
     android:orientation="vertical"
 
     >
-
     <!--使用FrameLayout当做盛放Fragment对象的容器-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@color/theme_gray"></LinearLayout>
+        android:background="@color/red"></LinearLayout>
     <FrameLayout
-
-
-
         android:id="@+id/framelayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+
         />
     <!--中间为一条分割线-->
-    <View
-        android:background="#eeeeee"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:padding="3dp"
-    android:background="@color/color_statusBar"
+    android:background="@color/white"
         android:elevation="3dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
@@ -43,36 +36,29 @@
         <RadioButton
             android:id="@+id/radio_hongbaomap"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:button="@null"
             android:drawableTop="@drawable/selector_tab_hongbao"
+            android:layout_gravity="center"
             android:gravity="center"
             android:paddingLeft="0dp"
-            android:text="主页"
-            android:textColor="@drawable/selector_text_color"
-            android:textSize="12sp"
-            />
-
-
+            android:textSize="0sp" />
         <RadioButton
             android:id="@+id/radio_youyisi"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:button="@null"
             android:drawableTop="@drawable/selector_tab_youyisi"
+
             android:gravity="center"
             android:paddingLeft="0dp"
-            android:text="有意思"
-            android:textColor="@drawable/selector_text_color"
 
-            android:textSize="12sp"
-
-            />
-
+            android:layout_gravity="center"
+            android:textSize="0sp" />
         <!--</LinearLayout>-->
         <!--给中间凸起按钮预留位置-->
         <LinearLayout
@@ -88,35 +74,32 @@
             android:layout_weight="1">-->
         <RadioButton
             android:id="@+id/radio_tongxunlu"
-
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:button="@null"
             android:drawableTop="@drawable/selector_tab_tongxunlu"
+            android:layout_gravity="center"
             android:gravity="center"
             android:paddingLeft="0dp"
-            android:text="通讯录"
-            android:textColor="@drawable/selector_text_color"
 
-            android:textSize="12sp"/>
+
+            android:textSize="0sp"/>
         <RadioButton
             android:id="@+id/radio_wode"
-
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:button="@null"
             android:drawableTop="@drawable/selector_tab_wode"
+            android:layout_gravity="center"
             android:gravity="center"
             android:paddingLeft="0dp"
-            android:text="我的"
-            android:textColor="@drawable/selector_text_color"
 
-            android:textSize="12sp"/>
 
+            android:textSize="0sp"/>
         <!-- </LinearLayout>-->
     </RadioGroup>
     <!--<LinearLayout-->

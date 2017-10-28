@@ -3,9 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="color_text_unselected">#515151</color>
+    <color name="little_grey">#e6e6e6</color>
     <color name="color_text_selected">#d81e06</color>
-    <color name="theme_gray">#2c2c2c</color>
-    <color name="color_statusBar">#eeeeee</color>
+    <color name="color_text_unselected">#707070</color>
     <color name="gold">#FFD700</color>
+    <color name="colorHalfTransparent">#e0000000</color>
+    <color name="transparent">#00000000</color>
+<color name="white">#FFFFFF</color>
+    <color name="red">#de5341</color>
 </resources>

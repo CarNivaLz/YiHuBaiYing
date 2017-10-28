@@ -2,31 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-
-
-
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="3dp">
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:elevation="4dp">
-
+            android:layout_height="120dp">
         </com.youth.banner.Banner>
+    </FrameLayout>
         <!--子布局控件-->
 
-
-
-
-    <View
-        android:background="#eeeeee"
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-    <com.amap.api.maps.TextureMapView
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    >
+        android:layout_height="match_parent"
+        >
 
+        <com.amap.api.maps.TextureMapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        >
+
+        <!-- 自定义按钮位置，具体可以通过margin_left 和 top来确定-->
+        <ImageButton
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/location_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mylocation"
+            android:background="@color/transparent"/>
+
+    </RelativeLayout>
 </LinearLayout>

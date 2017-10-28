@@ -5,11 +5,14 @@ import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.loader.GlideImageLoader;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +31,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapFragment;
@@ -33,6 +40,7 @@ import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.CameraPositionCreator;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
@@ -47,8 +55,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.bitmap;
+import static android.R.attr.scaleHeight;
+import static android.R.color.transparent;
 import static android.view.View.inflate;
 import static com.amap.api.col.sl3.au.b;
+import static com.amap.api.col.sl3.dj.B;
 import static com.amap.api.col.sl3.dj.m;
 
 
@@ -57,8 +69,7 @@ import static com.amap.api.col.sl3.dj.m;
  */
 
 public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChangeListener,
-        AMap.OnMarkerClickListener,
-        AMap.OnCameraChangeListener{
+        AMap.OnMarkerClickListener,View.OnClickListener {
 
     public static boolean isInit = false;
 
@@ -70,8 +81,10 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     private MyLocationStyle myLocationStyle;
     private Bitmap mBitmap;
     private String NUMBER="88";
-    private Location myLocation;
+    private LatLng myLocation;
     private boolean isAdded=false;
+
+    private ImageButton location_btn;
 
 
     @Nullable
@@ -79,12 +92,11 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag_hongbao,container,false);
 
-
-
-
         initHongbaoMarker(NUMBER);
         mapView=(TextureMapView)view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
+         location_btn=(ImageButton) view.findViewById(R.id.location_bt);
+
         initView(view);
         return view;
     }
@@ -93,6 +105,7 @@ public void initHongbaoMarker(String number){
     View markerView=inflater.inflate(R.layout.marker_redvelet,null);
     TextView textView =(TextView)markerView.findViewById(R.id.num_hongbao);
     textView.setText(number);
+
     mBitmap=convertViewToBitmap(markerView);
 }
 
@@ -130,8 +143,11 @@ public void initHongbaoMarker(String number){
     }
 
     public void setUpMap(){
+
+
         aMap.setMapCustomEnable(true);
         aMap.setOnMarkerClickListener(this);
+        location_btn.setOnClickListener(this);
         //amp
         myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationIcon(BitmapDescriptorFactory.
@@ -139,20 +155,25 @@ public void initHongbaoMarker(String number){
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
         //定位间隔
         //myLocationStyle.interval(2000);
+        //transparent
+        myLocationStyle.strokeColor(Color.argb(1, 0, 0, 0));
+        myLocationStyle.radiusFillColor(Color.argb(1, 0, 0, 0));
         aMap.setMyLocationStyle(myLocationStyle);
 
         //ui控件
+
         uiSettings=aMap.getUiSettings();
-        uiSettings.setMyLocationButtonEnabled(true);
+        uiSettings.setMyLocationButtonEnabled(false);
         uiSettings.setZoomGesturesEnabled(true);
         uiSettings.setScaleControlsEnabled(false);
         uiSettings.setZoomControlsEnabled(false);
         //启动
         aMap.setMyLocationEnabled(true);
-
+        aMap.setMinZoomLevel(15);
         aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
 
     }
+
     /**
      * 方法必须重写
      */
@@ -199,6 +220,7 @@ public void initHongbaoMarker(String number){
     @Override
     public void onMyLocationChange(Location location) {
         // 定位回调监听
+        myLocation=new LatLng(location.getLatitude(),location.getLongitude());
         if(location != null) {
             Log.e("amap", "onMyLocationChange 定位成功， lat: " + location.getLatitude() + " lon: " + location.getLongitude());
             Bundle bundle = location.getExtras();
@@ -228,16 +250,7 @@ public void initHongbaoMarker(String number){
         }
     }
 
-//    private void addMarkersToMap(Location location,Bitmap markerIcon){
-//        final LatLng mLatLng=new LatLng(location.getLatitude()+0.01,location.getLongitude()+0.01);
-//        MarkerOptions markerOptions=new MarkerOptions();
-//        markerOptions.draggable(false);
-//        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(markerIcon))
-//                .position(mLatLng);
-//        aMap.addMarker(markerOptions);
-//
-//    }
-//自定义地图
+
     private void setMapCustomStyleFile(Context context) {
         //草色青mystyle_sdk_1508855865_0100.data
 
@@ -292,56 +305,15 @@ public void initHongbaoMarker(String number){
     @Override
     public boolean onMarkerClick( Marker marker) {
         if (aMap != null) {
-            jumpPoint(marker);
+            Toast.makeText(getContext(), "您点击了Marker", Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(getContext(), "您点击了Marker", Toast.LENGTH_LONG).show();
         return true;
     }
-    @Override
-    public void onCameraChange(CameraPosition cameraPosition) {
-    }
-    @Override
-    public void onCameraChangeFinish(CameraPosition cameraPosition) {
-
-    }
-    /**
-     * marker点击时跳动一下
-     */
-    public void jumpPoint(final Marker marker) {
-        final Handler handler = new Handler();
-        final long start = SystemClock.uptimeMillis();
-        Projection proj = aMap.getProjection();
-        final LatLng markerLatlng = marker.getPosition();
-        Point markerPoint = proj.toScreenLocation(markerLatlng);
-        markerPoint.offset(0, -100);
-        final LatLng startLatLng = proj.fromScreenLocation(markerPoint);
-        final long duration = 1500;
-
-        final Interpolator interpolator = new BounceInterpolator();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                long elapsed = SystemClock.uptimeMillis() - start;
-                float t = interpolator.getInterpolation((float) elapsed
-                        / duration);
-                double lng = t * markerLatlng.longitude + (1 - t)
-                        * startLatLng.longitude;
-                double lat = t * markerLatlng.latitude + (1 - t)
-                        * startLatLng.latitude;
-                marker.setPosition(new LatLng(lat, lng));
-                if (t < 1.0) {
-                    handler.postDelayed(this, 16);
-                }
-            }
-        });
-    }
-
-
 
 
 
     private Marker drawMarkerOnMap(Location location, Bitmap markerIcon) {
-        final LatLng point=new LatLng(location.getLatitude()+0.01,location.getLongitude()+0.01);
+        final LatLng point=new LatLng(location.getLatitude()+0.001,location.getLongitude()+0.001);
 
         if (aMap != null && point != null) {
 
@@ -349,9 +321,7 @@ public void initHongbaoMarker(String number){
 
                     .position(point)
 
-                    .icon(BitmapDescriptorFactory.fromBitmap(markerIcon)));
-
-
+                    .icon(BitmapDescriptorFactory.fromBitmap(changeBitmapSize(markerIcon))));
 
             return marker;
 
@@ -371,5 +341,44 @@ public void initHongbaoMarker(String number){
 
         return bitmap;
 
+    }
+
+
+    private Bitmap changeBitmapSize(Bitmap bitmap) {
+
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Log.e("width","width:"+width);
+        Log.e("height","height:"+height);
+        //设置想要的大小
+
+
+        //计算压缩的比率
+        double scaleWidth=0.68;
+        double scaleHeight=0.68;
+
+        //获取想要缩放的matrix
+        Matrix matrix = new Matrix();
+        matrix.postScale((float) scaleWidth,(float) scaleHeight);
+
+        //获取新的bitmap
+        bitmap=Bitmap.createBitmap(bitmap,0,0,width,height,matrix,true);
+        bitmap.getWidth();
+        bitmap.getHeight();
+        Log.e("newWidth","newWidth"+bitmap.getWidth());
+        Log.e("newHeight","newHeight"+bitmap.getHeight());
+        return bitmap;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+
+            case R.id.location_bt:
+                    aMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                            myLocation, 18,0,0)));
+break;
+
+        }
     }
 }
