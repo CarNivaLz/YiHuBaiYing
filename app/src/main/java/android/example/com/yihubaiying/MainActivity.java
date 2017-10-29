@@ -1,4 +1,4 @@
-package android.example.com.yihubaiying.activity;
+package android.example.com.yihubaiying;
 
 import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.fragment.Fragment_HongBaoMap;
@@ -6,6 +6,7 @@ import android.example.com.yihubaiying.fragment.Fragment_TongXunLu;
 import android.example.com.yihubaiying.fragment.Fragment_WoDe;
 import android.example.com.yihubaiying.fragment.Fragment_YouYiSi;
 import android.example.com.yihubaiying.fragment.fragment_hongbaomap.Fragment_HongBao;
+import android.example.com.yihubaiying.utils.CheckPermissionsActivity;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -31,7 +32,7 @@ import static android.view.Window.FEATURE_NO_TITLE;
 import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
 import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends CheckPermissionsActivity implements View.OnClickListener{
 
     private RadioGroup radioGroup;
     private RadioButton radio_hongBaoMap,radio_tongXunLu,radio_woDe,radio_youYiSi;

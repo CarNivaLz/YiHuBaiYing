@@ -3,6 +3,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
 
     >
@@ -25,7 +26,6 @@
         android:layout_height="45dp"
         android:padding="3dp"
     android:background="@color/white"
-        android:elevation="3dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
         <!--<LinearLayout
@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
+
         </LinearLayout>
         <!--<LinearLayout
             android:layout_width="0dp"
@@ -102,6 +103,21 @@
             android:textSize="0sp"/>
         <!-- </LinearLayout>-->
     </RadioGroup>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/ibHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:background="@color/blue"
+        app:backgroundTint="#12ade6"
+        android:layout_gravity="center"
+        android:layout_marginTop="-65dp"
+        android:layout_above="@id/radioGroup"
+        android:src="@drawable/selector_tab_yihubaiying"
+        android:elevation="3dp"/>
+
     <!--<LinearLayout-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
