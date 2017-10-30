@@ -1,12 +1,13 @@
 package android.example.com.yihubaiying.enity;
 
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 
 /**
  * Created by carnivalnian on 2017/10/29.
  */
 
-public class HongBao {
+public class HongBao  {
     private String title;
     private String snipped;
     private LatLng latLng;

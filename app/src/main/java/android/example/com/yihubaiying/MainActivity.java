@@ -1,38 +1,25 @@
 package android.example.com.yihubaiying;
 
-import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.fragment.Fragment_HongBaoMap;
 import android.example.com.yihubaiying.fragment.Fragment_TongXunLu;
 import android.example.com.yihubaiying.fragment.Fragment_WoDe;
 import android.example.com.yihubaiying.fragment.Fragment_YouYiSi;
-import android.example.com.yihubaiying.fragment.fragment_hongbaomap.Fragment_HongBao;
-import android.example.com.yihubaiying.utils.CheckPermissionsActivity;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.KITKAT;
-import static android.view.Window.FEATURE_NO_TITLE;
-import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
-import static android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-
-public class MainActivity extends CheckPermissionsActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RadioGroup radioGroup;
     private RadioButton radio_hongBaoMap,radio_tongXunLu,radio_woDe,radio_youYiSi;

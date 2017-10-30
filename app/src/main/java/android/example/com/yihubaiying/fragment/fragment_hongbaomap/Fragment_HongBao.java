@@ -18,9 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import com.amap.api.maps.AMap.CancelableCallback;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.UiSettings;
@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
 /**
  * Created by carnivalnian on 2017/10/21.
  */
@@ -47,7 +48,8 @@ import java.util.Random;
 public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChangeListener,
         AMap.OnMarkerClickListener,
         View.OnClickListener,
-        AMap.OnMapClickListener{
+        AMap.OnMapClickListener,
+        CancelableCallback{
 
     public static boolean isInit = false;
     private Banner banner;
@@ -56,21 +58,24 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     private UiSettings uiSettings;
     private MyLocationStyle myLocationStyle;
     private Bitmap mBitmap;
-    private int NUMBER=88;
     private boolean isAdded=false;
+    private boolean isHongBaoInit=false;
     private TextView numHongbao;
     private ImageButton location_btn;
     private MyInfoWinAdapter adapter;
     private ArrayList<HongBao>hongBaoArrayList;
     private LatLng mineLatLng;
     private View markerView;
-private Marker markerLocal;
+    private Marker markerLocal;
+    private Random r=new Random(1);
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag_hongbao,container,false);
         mapView=(TextureMapView)view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
+        Log.e("fragment_1","onCreate");
         location_btn=(ImageButton) view.findViewById(R.id.location_bt);
         initView(view);
         return view;
@@ -88,6 +93,7 @@ private Marker markerLocal;
             aMap.clear();
             markerLocal=null;
             aMap=mapView.getMap();
+         isAdded=false;
          }
         setUpMap();
         aMap.setOnMyLocationChangeListener(this);
@@ -113,10 +119,10 @@ private Marker markerLocal;
     public void setUpMap(){
 
         setMapCustomStyleFile(getContext());
-
+//入果点击事件没反应看看是否监听器初始化了
         adapter=new MyInfoWinAdapter(getContext());
         aMap.setInfoWindowAdapter(adapter);
-
+        aMap.setOnMapClickListener(this);
         aMap.setMapCustomEnable(true);
         aMap.setOnMarkerClickListener(this);
         location_btn.setOnClickListener(this);
@@ -142,6 +148,7 @@ private Marker markerLocal;
         //启动
         aMap.setMyLocationEnabled(true);
         aMap.setMinZoomLevel(15);
+        aMap.setMaxZoomLevel(17);
         aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
 
     }
@@ -153,6 +160,7 @@ private Marker markerLocal;
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        Log.e("fragment_1","onResume");
     }
 
     /**
@@ -162,6 +170,7 @@ private Marker markerLocal;
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        Log.e("fragment_1","onPause");
     }
 
     /**
@@ -177,7 +186,7 @@ private Marker markerLocal;
     public void onDestroyView(){
         super.onDestroyView();
         mapView.onDestroy();
-
+        Log.e("fragment_1","onDestroyView");
     }
 
     /**
@@ -186,7 +195,7 @@ private Marker markerLocal;
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        Log.e("fragment_1","onDestroy");
     }
 
 
@@ -199,9 +208,10 @@ private Marker markerLocal;
             Bundle bundle = mylocation.getExtras();
              mineLatLng=new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
             if(isAdded==false) {
+
                 initHongbaoMarker(mylocation);
                isAdded=true;
-                Log.e("sucess to drawMarker","a");
+
             }
             if(bundle != null) {
                 int errorCode = bundle.getInt(MyLocationStyle.ERROR_CODE);
@@ -285,10 +295,9 @@ private Marker markerLocal;
 
     public void initHongbaoMarker(Location location){
 
-        Random r=new Random(System.currentTimeMillis());
         hongBaoArrayList=new ArrayList<>();
         for(int i=0;i<15;i++){
-           LatLng hongbaoLatLng = new LatLng(location.getLatitude() + 0.0005 * (r.nextInt(10) - 5), location.getLongitude() + 0.0005 * (r.nextInt(10) - 5));
+           LatLng hongbaoLatLng = new LatLng(location.getLatitude() + 0.001 * (r.nextInt(10) - 5), location.getLongitude() + 0.001 * (r.nextInt(10) - 5));
             HongBao mHongBao=new HongBao();
             mHongBao.setId(i);
             mHongBao.setTitle("中海国际");
@@ -300,9 +309,9 @@ private Marker markerLocal;
             mBitmap=convertViewToBitmap(markerView);
             //
             drawMarkerOnMap(hongbaoLatLng,mBitmap,hongBaoArrayList.get(i).getTitle(),hongBaoArrayList.get(i).getSnipped());
-            Log.e("sucess to drawMarker","b");
         }
     }
+
 
     private Bitmap changeBitmapSize(Bitmap bitmap) {
 
@@ -342,7 +351,6 @@ private Marker markerLocal;
                         .title(mtitle)
                         .snippet(msnippet)
                         .icon(BitmapDescriptorFactory.fromBitmap(changeBitmapSize(markerIcon))));
-                Log.e("sucess to drawMarker","c");
             }
         }
     }
@@ -355,9 +363,12 @@ private Marker markerLocal;
         if (aMap != null) {
             markerLocal=marker;
             //seticon显示蓝circle
+            changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                    markerLocal.getPosition(), 17, 0, 0)),this);
         }
+
         //返回 “false”，除定义的操作之外，默认操作也将会被执行（如果有infowindow会调用方法显示出来）
-        return false;
+        return true;
     }
 
  // 画红包范围蓝圈
@@ -371,21 +382,46 @@ private Marker markerLocal;
     }
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        if(v.getId()==R.id.location_bt) {
+            if (markerLocal != null) {
+                markerLocal.hideInfoWindow();
+                markerLocal = null;
+            }
+            changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                    mineLatLng, 17, 0, 0)),this);
 
-            case R.id.location_bt:
-                    aMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                            mineLatLng, 18,0,0)));
-            break;
         }
+
     }
     @Override
-    public void onMapClick(LatLng lPoint){
+    public void onMapClick(LatLng point){
         //点击地图上没marker 的地方，隐藏inforwindow
         if (markerLocal != null) {
+
             markerLocal.hideInfoWindow();
+            markerLocal=null;
             //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
             //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
         }
+
+    }
+
+    /**
+     * 地图动画效果终止回调方法
+     */
+    @Override
+    public void onCancel() {
+
+    }
+//完成回掉
+
+    @Override
+    public void onFinish() {
+
+        markerLocal.showInfoWindow();
+    }
+
+    private void changeCamera(CameraUpdate update, CancelableCallback callback) {
+            aMap.animateCamera(update, 800, callback);
     }
 }

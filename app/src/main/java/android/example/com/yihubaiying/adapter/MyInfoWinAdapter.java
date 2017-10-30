@@ -74,15 +74,15 @@ public class MyInfoWinAdapter implements AMap.InfoWindowAdapter, View.OnClickLis
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
-            case R.id.navigation_LL:  //点击导航
-                NavigationUtils.Navigation(latLng);
-                break;
-
-            case R.id.call_LL:  //点击打电话
-                PhoneCallUtils.call("028-"); //TODO 处理电话号码
-                break;
-        }
+//        switch (id){
+//            case R.id.navigation_LL:  //点击导航
+////                NavigationUtils.Navigation(latLng);
+////                break;
+//
+//            case R.id.call_LL:  //点击打电话
+////                PhoneCallUtils.call("028-"); //TODO 处理电话号码
+////                break;
+//        }
     }
 
 }

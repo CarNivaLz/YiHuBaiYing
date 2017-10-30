@@ -15,11 +15,10 @@
     </FrameLayout>
         <!--子布局控件-->
 
-    <RelativeLayout
+    <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <com.amap.api.maps.TextureMapView
             android:id="@+id/map"
@@ -37,5 +36,5 @@
             android:src="@drawable/ic_mylocation"
             android:background="@color/transparent"/>
 
-    </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>

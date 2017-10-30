@@ -9,4 +9,11 @@
     <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
     <string name="setting">设置</string>
     <string name="cancel">取消</string>
+
+    <string name="storage_description_title">你能允许存储权限吗?</string>
+    <string name="storage_description_why_we_need_the_permission">你好,地图缓存需要存储权限。你能允许吗?</string>
+    <string name="location_description_title">你能允许定位权限吗?</string>
+    <string name="location_description_why_we_need_the_permission">你好,定位功能需要获取位置权限。你能允许吗?</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Cancel</string>
 </resources>
