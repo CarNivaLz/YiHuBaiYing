@@ -1,33 +1,40 @@
 package android.example.com.yihubaiying;
 
+import android.Manifest;
 import android.example.com.yihubaiying.fragment.Fragment_HongBaoMap;
 import android.example.com.yihubaiying.fragment.Fragment_TongXunLu;
 import android.example.com.yihubaiying.fragment.Fragment_WoDe;
 import android.example.com.yihubaiying.fragment.Fragment_YouYiSi;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+
 import java.util.ArrayList;
 import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private static final int RC_CAMERA = 2333;
     private RadioGroup radioGroup;
     private RadioButton radio_hongBaoMap,radio_tongXunLu,radio_woDe,radio_youYiSi;
 
     private Fragment fragment_HongBaoMap,fragment_TongXunLu,fragment_WoDe,fragment_YouYiSi;
-    private List<Fragment> fragmentList;
+//    private List<Fragment> fragmentList;
 
     private FrameLayout frameLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +49,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             decorView.setSystemUiVisibility(option);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+
         initView();
     }
+
+
 
     private void initView(){
         frameLayout=(FrameLayout)findViewById(R.id.framelayout);
@@ -59,11 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragment_TongXunLu=new Fragment_TongXunLu();
         fragment_WoDe=new Fragment_WoDe();
 
-        fragmentList=new ArrayList<>();
-        fragmentList.add(fragment_HongBaoMap);
-        fragmentList.add(fragment_YouYiSi);
-        fragmentList.add(fragment_TongXunLu);
-        fragmentList.add(fragment_WoDe);
+//        fragmentList=new ArrayList<>();
+//        fragmentList.add(fragment_HongBaoMap);
+//        fragmentList.add(fragment_YouYiSi);
+//        fragmentList.add(fragment_TongXunLu);
+//        fragmentList.add(fragment_WoDe);
 
         //设置RadioGroup开始时设置的按钮，设置第一个按钮为默认值
         radioGroup.check(R.id.radio_hongbaomap);
@@ -93,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //不同按钮对应着不同的Fragment对象页面
         switch (v.getId()){
             case R.id.radio_hongbaomap:
+                fragment_HongBaoMap=new Fragment_HongBaoMap();
                 addFragment(fragment_HongBaoMap);
                 break;
             case R.id.radio_youyisi:
@@ -114,4 +125,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewGroup.removeAllViews();
         super.finish();
     }
+
 }

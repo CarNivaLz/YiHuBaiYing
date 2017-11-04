@@ -1,5 +1,7 @@
 package android.example.com.yihubaiying.fragment.fragment_hongbaomap;
 
+
+import android.app.Dialog;
 import android.content.Context;
 import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.adapter.MyInfoWinAdapter;
@@ -11,25 +13,32 @@ import android.graphics.Matrix;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.amap.api.maps.AMap.CancelableCallback;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.Circle;
+import com.amap.api.maps.model.CircleOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
+import com.yanzhenjie.permission.PermissionListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import java.io.File;
@@ -41,25 +50,29 @@ import java.util.List;
 import java.util.Random;
 
 
+
 /**
  * Created by carnivalnian on 2017/10/21.
  */
 
-public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChangeListener,
+public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocationChangeListener,
         AMap.OnMarkerClickListener,
         View.OnClickListener,
         AMap.OnMapClickListener,
-        CancelableCallback{
+        CancelableCallback,AMap.OnInfoWindowClickListener{
 
+    private static final int STROKE_COLOR = Color.argb(180, 3, 145, 255);
+    private static final int FILL_COLOR = Color.argb(10, 0, 0, 180);
     public static boolean isInit = false;
+    private boolean isAdded=false;
     private Banner banner;
     private AMap aMap;
     private TextureMapView mapView;
+    private LocationSource locationSource;
     private UiSettings uiSettings;
     private MyLocationStyle myLocationStyle;
     private Bitmap mBitmap;
-    private boolean isAdded=false;
-    private boolean isHongBaoInit=false;
+
     private TextView numHongbao;
     private ImageButton location_btn;
     private MyInfoWinAdapter adapter;
@@ -69,34 +82,52 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     private Marker markerLocal;
     private Random r=new Random(1);
 
+    private Circle circle;
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag_hongbao,container,false);
+        isInit=true;
         mapView=(TextureMapView)view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         Log.e("fragment_1","onCreate");
-        location_btn=(ImageButton) view.findViewById(R.id.location_bt);
+        AndPermission.with(this)
+                .requestCode(101)
+                .permission(
+                        // 申请多个权限组方式：
+                        Permission.LOCATION,
+                        Permission.STORAGE
+                )
+                .callback(listener)
+                .start();
         initView(view);
+        setUpMap();
         return view;
     }
 
 
     private void initView(View view) {
-        initBanner(view);
-        LayoutInflater inflater=(LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        markerView=inflater.inflate(R.layout.marker_redvelet,null);
-        numHongbao =(TextView)markerView.findViewById(R.id.num_hongbao);
-        if (aMap == null) {
+
+
+/*        if (aMap == null) {
             aMap = mapView.getMap();
     }else{
             aMap.clear();
             markerLocal=null;
             aMap=mapView.getMap();
          isAdded=false;
-         }
-        setUpMap();
-        aMap.setOnMyLocationChangeListener(this);
+         }*/
+        initBanner(view);
+        LayoutInflater inflater=(LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        markerView=inflater.inflate(R.layout.marker_redvelet,null);
+        numHongbao =(TextView)markerView.findViewById(R.id.num_hongbao);
+
+        location_btn=(ImageButton) view.findViewById(R.id.location_bt);
+
+
     }
 
     public void initBanner(View view){
@@ -117,40 +148,57 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     }
 
     public void setUpMap(){
+        aMap = mapView.getMap();
 
+//地图自定义主题
         setMapCustomStyleFile(getContext());
+        aMap.setMapCustomEnable(true);
 //入果点击事件没反应看看是否监听器初始化了
         adapter=new MyInfoWinAdapter(getContext());
         aMap.setInfoWindowAdapter(adapter);
+//监听
+        aMap.setOnMyLocationChangeListener(this);
         aMap.setOnMapClickListener(this);
-        aMap.setMapCustomEnable(true);
         aMap.setOnMarkerClickListener(this);
         location_btn.setOnClickListener(this);
-        //amp
+        aMap.setOnInfoWindowClickListener(this);
+//视角
+        aMap.setMinZoomLevel(15);
+        aMap.setMaxZoomLevel(17);
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+
+        //定位蓝点样式，定位模式
         myLocationStyle = new MyLocationStyle();
         myLocationStyle.myLocationIcon(BitmapDescriptorFactory.
                 fromResource(R.drawable.gps_point));
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
-        //定位间隔
-        //myLocationStyle.interval(2000);
-        //transparent
         myLocationStyle.strokeColor(Color.argb(1, 0, 0, 0));
         myLocationStyle.radiusFillColor(Color.argb(1, 0, 0, 0));
-        aMap.setMyLocationStyle(myLocationStyle);
 
-        //ui控件
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE);
 
+        //地图控件
         uiSettings=aMap.getUiSettings();
         uiSettings.setMyLocationButtonEnabled(false);
         uiSettings.setZoomGesturesEnabled(true);
         uiSettings.setScaleControlsEnabled(false);
         uiSettings.setZoomControlsEnabled(false);
         //启动
-        aMap.setMyLocationEnabled(true);
-        aMap.setMinZoomLevel(15);
-        aMap.setMaxZoomLevel(17);
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
 
+        aMap.setMyLocationEnabled(true);
+        aMap.setMyLocationStyle(myLocationStyle);
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+
+        if (null != aMap) {
+            //每次重新加载地图前，清除数据
+            aMap.clear();
+            markerLocal = null;
+        isAdded=false;
+        }
+        setUpMap();
     }
 
     /**
@@ -160,6 +208,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        aMap.reloadMap();
         Log.e("fragment_1","onResume");
     }
 
@@ -170,6 +219,7 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        aMap.reloadMap();
         Log.e("fragment_1","onPause");
     }
 
@@ -327,8 +377,6 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
         bitmap=Bitmap.createBitmap(bitmap,0,0,width,height,matrix,true);
         bitmap.getWidth();
         bitmap.getHeight();
-        Log.e("newWidth","newWidth"+bitmap.getWidth());
-        Log.e("newHeight","newHeight"+bitmap.getHeight());
         return bitmap;
     }
 
@@ -361,25 +409,19 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     @Override
     public boolean onMarkerClick( Marker marker) {
         if (aMap != null) {
-            markerLocal=marker;
-            //seticon显示蓝circle
-            changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                    markerLocal.getPosition(), 17, 0, 0)),this);
+            if(circle!=null) {
+                circle.remove();
+            }
+            if (!marker.getPosition().equals(mineLatLng)) {
+                markerLocal = marker;
+                changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                        markerLocal.getPosition(), 17, 0, 0)), this);
+            }
         }
-
         //返回 “false”，除定义的操作之外，默认操作也将会被执行（如果有infowindow会调用方法显示出来）
         return true;
     }
 
- // 画红包范围蓝圈
-    private void drawMarkerCircleOnMap(LatLng latLng){
-
-        if(aMap!=null && latLng!=null){
-            Marker marker=aMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.circle)));
-        }
-    }
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.location_bt) {
@@ -396,14 +438,22 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     @Override
     public void onMapClick(LatLng point){
         //点击地图上没marker 的地方，隐藏inforwindow
+        banner.setVisibility(View.GONE);
         if (markerLocal != null) {
-
+            circle.remove();
             markerLocal.hideInfoWindow();
             markerLocal=null;
             //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
             //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
         }
 
+    }
+
+    @Override
+   public void onInfoWindowClick(Marker marker){
+        marker.hideInfoWindow();
+        circle.remove();
+        showDialog();
     }
 
     /**
@@ -413,15 +463,60 @@ public  class Fragment_HongBao extends Fragment implements AMap.OnMyLocationChan
     public void onCancel() {
 
     }
+
+
+    private void showDialog() {
+        Dialog dialog=new Dialog(getContext(),R.style.MyDialog);
+        dialog.setContentView(R.layout.dialog_default);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCancelable(true);
+        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        dialog.getWindow().setAttributes(lp);
+        dialog.show();
+    }
 //完成回掉
 
     @Override
     public void onFinish() {
 
         markerLocal.showInfoWindow();
+
+        circle=aMap.addCircle(new CircleOptions()
+                .center(markerLocal.getPosition())
+                .strokeColor(STROKE_COLOR)
+                .fillColor(FILL_COLOR)
+                .strokeWidth(2f)
+                .radius(250f)
+                .visible(true));
     }
 
     private void changeCamera(CameraUpdate update, CancelableCallback callback) {
-            aMap.animateCamera(update, 800, callback);
+            aMap.animateCamera(update, 200, callback);
     }
+
+    private PermissionListener listener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, List<String> grantedPermissions) {
+            // 权限申请成功回调。
+            // 这里的requestCode就是申请时设置的requestCode。
+            // 和onActivityResult()的requestCode一样，用来区分多个不同的请求。
+            if(AndPermission.hasPermission( getContext(),Permission.LOCATION)&&AndPermission.hasPermission( getContext(),Permission.STORAGE)) {
+                if (requestCode == 200) {
+
+                }
+            }
+        }
+
+        @Override
+        public void onFailed(int requestCode, List<String> deniedPermissions) {
+            // 权限申请失败回调。
+            if(requestCode == 200) {
+
+            }
+        }
+    };
+
 }
