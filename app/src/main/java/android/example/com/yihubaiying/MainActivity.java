@@ -8,6 +8,7 @@ import android.example.com.yihubaiying.fragment.Fragment_YouYiSi;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -60,6 +62,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initView(){
+
+        FloatingActionButton floatingActionButton= (FloatingActionButton) findViewById(R.id.ibHome);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"hh",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         frameLayout=(FrameLayout)findViewById(R.id.framelayout);
         radioGroup=(RadioGroup) findViewById(R.id.radioGroup);
 
@@ -100,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //提交事务，否则事务不生效
         fragmentTransaction.commit();
     }
+
 
     @Override
     public void onClick(View v) {
