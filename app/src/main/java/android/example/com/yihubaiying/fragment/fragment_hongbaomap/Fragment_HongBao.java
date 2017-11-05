@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.example.com.yihubaiying.R;
+import android.example.com.yihubaiying.activity.HongBaoActivity;
 import android.example.com.yihubaiying.adapter.MyInfoWinAdapter;
 import android.example.com.yihubaiying.enity.HongBao;
 import android.example.com.yihubaiying.loader.GlideImageLoader;
@@ -475,7 +476,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         if(marker == sendMarker){
             sendMarker.hideInfoWindow();
             sendMarker.remove();
-//            Intent intent =new Intent()
+
         }else {
         marker.hideInfoWindow();
         circle.remove();
