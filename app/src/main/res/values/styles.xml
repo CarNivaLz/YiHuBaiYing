@@ -24,4 +24,142 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+
+    <!-- Base application theme. -->
+
+
+
+
+    <style name="SwitchButtonStyle">
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">#ffffff</item>
+    </style>
+    <!--实下滑线样式-->
+    <style name="Line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/line</item>
+    </style>
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>  <!--把该属性改为false即可使menu位置位于toolbar之下-->
+    </style>
+    <style name="jrmf_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--窗口背景色-->
+        <item name="android:windowFrame">@null</item>
+        <!--Dialog的windowFrame框为无-->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 窗口是否半透明——是（与第一条配合使用） -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 这个不设置的话，可能会出现边框黑线 -->
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <!-- 窗口弹出效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 是否允许背景模糊 -->
+    </style>
+
+
+
+
+    <style name="jrmf_commondialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="text_black_16">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="text_black_14">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="text_black_12">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12dip</item>
+    </style>
+    <style name="text_black_28">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+    <style name="text_gray_16">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">16dip</item>
+    </style>
+
+    <style name="text_red_16">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">16dip</item>
+    </style>
+
+    <style name="text_red_12">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">12dip</item>
+    </style>
+
+    <style name="text_blue_16">
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">16dip</item>
+    </style>
+
+    <style name="text_white_16">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16dip</item>
+    </style>
+
+    <style name="text_white_28">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">28dip</item>
+    </style>
+
+    <style name="text_red_28">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">28dip</item>
+    </style>
+
+    <style name="text_gray_12">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">12dip</item>
+    </style>
+
+    <style name="text_blue_12">
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">12dip</item>
+    </style>
+
+    <!--FragmentDialog-->
+    <style name="Jrmf_DialogTheme" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--CircleImageView属性-->
+    <declare-styleable name="Ry_CircleImageView">
+        <attr name="ry_civ_border_width" format="dimension" />
+        <attr name="ry_civ_border_color" format="color" />
+        <attr name="ry_civ_border_overlay" format="boolean" />
+        <attr name="ry_civ_fill_color" format="color" />
+    </declare-styleable>
+
+
+
+    <!-- ActionSheet进出动画 -->
+
+
 </resources>

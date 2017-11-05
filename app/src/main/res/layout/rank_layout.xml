@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="50dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:id="@+id/rank_num"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:layout_gravity="center_vertical"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/rank_user"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/user_five"/>
+    <TextView
+        android:id="@+id/rank_nickname"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxEms="5"
+        android:text="北单高手在此"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+    <ImageView
+        android:id="@+id/rank_diamond"
+        android:layout_marginLeft="40dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/diamond_icon"/>
+    <TextView
+        android:id="@+id/rank_decrib"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="日红包:147.6元"
+        />
+    <ImageView
+        android:id="@+id/rank_arrow"
+        android:layout_marginLeft="3dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/up_icon"/>
+
+
+
+
+
+
+</LinearLayout>
+
+
+
+
+
