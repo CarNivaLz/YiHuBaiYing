@@ -1,35 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <ImageView
-                android:id="@+id/hongbao_dialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="180dp"
-                android:layout_marginLeft="95dp"
-                android:src="@drawable/ic_dialoghongbao" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="420dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/open_rp_bg"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="180dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="91dp"
-            android:background="@drawable/btn_background"
-            android:text="打开红包"
-            android:textSize="19sp"
-            android:textColor="@color/gold" />
+        <LinearLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/close"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/ic_close"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <!-- 头像以及相关文字 -->
+        <LinearLayout
+            android:layout_below="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+
+                <ImageButton
+                    android:id="@+id/head_img"
+                    android:layout_width="81dp"
+                    android:layout_height="81dp"
+                    android:background="@drawable/ic_touxiang"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中海国际"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/head_img"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/gold"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:text="您领取了见赏红包"/>
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_below="@+id/textView1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:textColor="@color/white"
+                    android:textSize="23sp"
+                    android:text="恭喜发财，大吉大利"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+
+                <ImageButton
+                    android:id="@+id/open_btn"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_open_redvelet"
+                    android:layout_marginTop="55dp"
+                    android:layout_centerHorizontal="true" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/ic_below"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="14dp"
+                    android:id="@+id/imageView" />
+
+            </RelativeLayout>
+        </LinearLayout>
+</LinearLayout>
     </LinearLayout>
 
 
-</LinearLayout>

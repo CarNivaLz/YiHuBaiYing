@@ -39,10 +39,9 @@
             </intent-filter>
         </activity>
                 <activity android:name=".activity.HongBaoActivity"/>
+        <service android:name="com.amap.api.location.APSService" ></service>
 
     </application>
 
-    <service android:name="com.amap.api.location.APSService" >
-    </service>
 
 </manifest>
