@@ -3,6 +3,7 @@ package android.example.com.yihubaiying.fragment.fragment_hongbaomap;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.adapter.MyInfoWinAdapter;
 import android.example.com.yihubaiying.enity.HongBao;
@@ -21,8 +22,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.amap.api.maps.AMap.CancelableCallback;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
@@ -47,10 +51,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-
-
+import static android.example.com.yihubaiying.MainActivity.r;
 /**
  * Created by carnivalnian on 2017/10/21.
  */
@@ -59,7 +60,9 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         AMap.OnMarkerClickListener,
         View.OnClickListener,
         AMap.OnMapClickListener,
-        CancelableCallback,AMap.OnInfoWindowClickListener{
+        CancelableCallback,
+        AMap.OnInfoWindowClickListener,
+        AMap.OnMapLongClickListener{
 
     private static final int STROKE_COLOR = Color.argb(180, 3, 145, 255);
     private static final int FILL_COLOR = Color.argb(10, 0, 0, 180);
@@ -80,10 +83,12 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     private LatLng mineLatLng;
     private View markerView;
     private Marker markerLocal;
-    private Random r=new Random(1);
+
 
     private Circle circle;
+    private LatLng hongbaoLatLng;
 
+    private Marker sendMarker;
 
 
     @Nullable
@@ -340,31 +345,49 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 //        b、显示infowindow
 //                点击infowindow进入红包事件
 //        c、点击屏幕取消显示
+    private ArrayList<String> titleList=new ArrayList<>();
+    private void initTitleList(){
+
+        titleList.add("商家 中海国际");
+        titleList.add("商家 川西坝子");
+        titleList.add("商家 永辉超市");
+        titleList.add("用户 王三");
+        titleList.add("用户 胡一菲");
+        titleList.add("用户 飞翔的荷兰豆");
+        titleList.add("用户 lypeer");
+        titleList.add("商家 安杰电脑维修");
+        titleList.add("用户 电子科大杨伟豪");
+        titleList.add("用户 李杰钰");
+        titleList.add("用户 杨廷飞");
+        titleList.add("商家 自然美理发");
+        titleList.add("商家 中海国际");
+        titleList.add("商家 链家");
+        titleList.add("商家 KFC");
+        titleList.add("商家 快捷酒店");
+
+    }
 
 
 
     public void initHongbaoMarker(Location location){
+        if (aMap != null && location != null) {
+            initTitleList();
 
-        hongBaoArrayList=new ArrayList<>();
-        for(int i=0;i<15;i++){
-           LatLng hongbaoLatLng = new LatLng(location.getLatitude() + 0.001 * (r.nextInt(10) - 5), location.getLongitude() + 0.001 * (r.nextInt(10) - 5));
-            HongBao mHongBao=new HongBao();
-            mHongBao.setId(i);
-            mHongBao.setTitle("中海国际");
-            mHongBao.setNumber(i*6);
-            mHongBao.setSnipped("中海国际电子科技大学清水河校区附近楼盘开盘啦！");
-            mHongBao.setLatLng(hongbaoLatLng);
-            hongBaoArrayList.add(mHongBao);
-            numHongbao.setText("89");
             mBitmap=convertViewToBitmap(markerView);
-            //
-            drawMarkerOnMap(hongbaoLatLng,mBitmap,hongBaoArrayList.get(i).getTitle(),hongBaoArrayList.get(i).getSnipped());
+            for (int i=0;i<16;i++) {
+                LatLng latLng=new LatLng(location.getLatitude() + 0.001 * (r.nextInt(10) - 5), location.getLongitude() + 0.001 * (r.nextInt(10) - 5));
+                aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f)
+                        .position(latLng)
+                        .title(titleList.get(i))
+                        .snippet("电子科技大学附近锦绣花园二期开盘了！查看详细信息可以领取红包。")
+                        .icon(BitmapDescriptorFactory.fromBitmap(changeBitmapSize(mBitmap))));
+            }
         }
     }
 
 
     private Bitmap changeBitmapSize(Bitmap bitmap) {
-
+        numHongbao.setText("88");
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         //计算压缩的比率
@@ -381,6 +404,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     }
 
     public static Bitmap convertViewToBitmap(View view) {
+
         view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
                 View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
         view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
@@ -388,20 +412,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         Bitmap bitmap = view.getDrawingCache();
         return bitmap;
     }
-    /**
-     * 画红包
-     */
-    private void drawMarkerOnMap(LatLng latLng, Bitmap markerIcon,String mtitle,String msnippet) {
-        if (aMap != null && latLng != null) {
-        for (int i=0;i<15;i++) {
-             Marker marker =aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f)
-                        .position(latLng)
-                        .title(mtitle)
-                        .snippet(msnippet)
-                        .icon(BitmapDescriptorFactory.fromBitmap(changeBitmapSize(markerIcon))));
-            }
-        }
-    }
+
 
     /**
      * 对marker标注点点击响应事件
@@ -413,6 +424,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
                 circle.remove();
             }
             if (!marker.getPosition().equals(mineLatLng)) {
+
                 markerLocal = marker;
                 changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
                         markerLocal.getPosition(), 17, 0, 0)), this);
@@ -448,12 +460,32 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         }
 
     }
+    @Override
+    public void onMapLongClick(LatLng point){
+       sendMarker= aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f)
+                .position(point)
+                .title("一呼百应 发布红包")
+                .snippet("您是否要在此处发布红包？编辑发布详细信息请点击窗口")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.poi_marker_pressed)));
+
+    }
 
     @Override
    public void onInfoWindowClick(Marker marker){
+        if(marker == sendMarker){
+            sendMarker.hideInfoWindow();
+            sendMarker.remove();
+//            Intent intent =new Intent()
+        }else {
         marker.hideInfoWindow();
         circle.remove();
-        showDialog();
+        float distance = AMapUtils.calculateLineDistance(mineLatLng,marker.getPosition());
+        if(distance>300){
+            Toast.makeText(getContext(),"距离太远，您无法领取红包",Toast.LENGTH_SHORT).show();
+        }else {
+            showDialog();
+        }
+        }
     }
 
     /**
@@ -489,7 +521,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
                 .strokeColor(STROKE_COLOR)
                 .fillColor(FILL_COLOR)
                 .strokeWidth(2f)
-                .radius(250f)
+                .radius(300)
                 .visible(true));
     }
 

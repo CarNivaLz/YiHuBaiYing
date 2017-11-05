@@ -1,7 +1,13 @@
 package android.example.com.yihubaiying.enity;
 
+import android.location.Location;
+
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by carnivalnian on 2017/10/29.
@@ -13,6 +19,7 @@ public class HongBao  {
     private LatLng latLng;
     private int number;
     private int id;
+    public static Random r=new Random(1);
 
     public void setNumber(int number){
         this.number=number;
@@ -53,4 +60,6 @@ public class HongBao  {
     public int getId() {
         return id;
     }
+
+
 }

@@ -19,4 +19,5 @@
     <string name="prompt_we_need_camera">finish</string>
     <string name="prompt_already_get_permission">have finished</string>
     <string name="prompt_been_denied">deny</string>
+    <string name="snippet_demo">"电子科技大学附近锦绣花园二期开盘了！查看详细信息可以领取红包。"</string>
 </resources>

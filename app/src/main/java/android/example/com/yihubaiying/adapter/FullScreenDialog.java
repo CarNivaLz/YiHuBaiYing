@@ -1,7 +1,8 @@
-package android.example.com.yihubaiying;
+package android.example.com.yihubaiying.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.example.com.yihubaiying.R;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;

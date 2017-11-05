@@ -23,7 +23,7 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:padding="3dp"
     android:background="@color/white"
         android:layout_alignParentBottom="true"
@@ -41,10 +41,12 @@
             android:background="@android:color/transparent"
             android:button="@null"
             android:drawableTop="@drawable/selector_tab_hongbao"
-            android:layout_gravity="center"
             android:gravity="center"
+            android:layout_gravity="center"
             android:paddingLeft="0dp"
-            android:textSize="0sp" />
+            android:textSize="12sp"
+            android:text="主页"
+            android:textColor="@drawable/selector_text_color"/>
         <RadioButton
             android:id="@+id/radio_youyisi"
             android:layout_width="0dp"
@@ -58,7 +60,9 @@
             android:paddingLeft="0dp"
 
             android:layout_gravity="center"
-            android:textSize="0sp" />
+            android:textSize="12sp"
+            android:text="有意思"
+            android:textColor="@drawable/selector_text_color" />
         <!--</LinearLayout>-->
         <!--给中间凸起按钮预留位置-->
         <LinearLayout
@@ -85,8 +89,9 @@
             android:gravity="center"
             android:paddingLeft="0dp"
 
-
-            android:textSize="0sp"/>
+            android:textSize="12sp"
+            android:text="通讯录"
+            android:textColor="@drawable/selector_text_color"/>
         <RadioButton
             android:id="@+id/radio_wode"
             android:layout_width="0dp"
@@ -100,18 +105,18 @@
             android:paddingLeft="0dp"
 
 
-            android:textSize="0sp"/>
+            android:textSize="12sp"
+            android:text="我的"
+            android:textColor="@drawable/selector_text_color"/>
         <!-- </LinearLayout>-->
     </RadioGroup>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/ibHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        app:background="@color/blue"
-        app:backgroundTint="#12ade6"
+        app:backgroundTint="#de5341"
         android:layout_gravity="center"
         android:layout_marginTop="-65dp"
         android:layout_above="@id/radioGroup"

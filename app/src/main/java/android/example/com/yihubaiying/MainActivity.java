@@ -24,6 +24,8 @@ import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final int RC_CAMERA = 2333;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //    private List<Fragment> fragmentList;
 
     private FrameLayout frameLayout;
+
+    public static Random r=new Random(1);
 
 
     @Override
