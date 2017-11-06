@@ -38,7 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-                <activity android:name=".activity.HongBaoActivity"/>
+                <activity android:name=".activity.HongBaoActivity">
+
+                </activity>
+        <activity android:name=".activity.RandomHongbaoActivity">
+
+        </activity>
         <service android:name="com.amap.api.location.APSService" ></service>
 
     </application>

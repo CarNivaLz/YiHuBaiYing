@@ -4,6 +4,7 @@ package android.example.com.yihubaiying.fragment.fragment_hongbaomap;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.example.com.yihubaiying.MainActivity;
 import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.activity.HongBaoActivity;
 import android.example.com.yihubaiying.adapter.MyInfoWinAdapter;
@@ -20,7 +21,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,13 +75,16 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     private Banner banner;
     private AMap aMap;
     private TextureMapView mapView;
-    private LocationSource locationSource;
     private UiSettings uiSettings;
     private MyLocationStyle myLocationStyle;
     private Bitmap mBitmap;
 
     private TextView numHongbao;
+
     private ImageButton location_btn;
+
+
+
     private MyInfoWinAdapter adapter;
     private ArrayList<HongBao>hongBaoArrayList;
     private LatLng mineLatLng;
@@ -91,6 +97,9 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 
     private Marker sendMarker;
 
+    private Dialog hongbaoDia;
+    private ImageButton openRedvelet;
+    private Button closeDia;
 
     @Nullable
     @Override
@@ -130,10 +139,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         LayoutInflater inflater=(LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         markerView=inflater.inflate(R.layout.marker_redvelet,null);
         numHongbao =(TextView)markerView.findViewById(R.id.num_hongbao);
-
         location_btn=(ImageButton) view.findViewById(R.id.location_bt);
-
-
     }
 
     public void initBanner(View view){
@@ -166,8 +172,10 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         aMap.setOnMyLocationChangeListener(this);
         aMap.setOnMapClickListener(this);
         aMap.setOnMarkerClickListener(this);
-        location_btn.setOnClickListener(this);
         aMap.setOnInfoWindowClickListener(this);
+
+        location_btn.setOnClickListener(this);
+
 //视角
         aMap.setMinZoomLevel(15);
         aMap.setMaxZoomLevel(17);
@@ -437,15 +445,25 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.location_bt) {
-            if (markerLocal != null) {
-                markerLocal.hideInfoWindow();
-                markerLocal = null;
-            }
-            changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                    mineLatLng, 17, 0, 0)),this);
-
+        switch (v.getId()){
+            case R.id.location_bt:
+                if(v.getId()==R.id.location_bt)
+                    if (markerLocal != null) {
+                        markerLocal.hideInfoWindow();
+                        markerLocal = null;
+                    }
+                changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                        mineLatLng, 17, 0, 0)),this);
+                break;
+            case R.id.open_btn:
+                startActivity(new Intent(getActivity(),HongBaoActivity.class));
+                break;
+            case R.id.close:
+                hongbaoDia.dismiss();
         }
+
+
+
 
     }
     @Override
@@ -456,8 +474,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
             circle.remove();
             markerLocal.hideInfoWindow();
             markerLocal=null;
-            //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
-            //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
+
         }
 
     }
@@ -499,16 +516,23 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 
 
     private void showDialog() {
-        Dialog dialog=new Dialog(getContext(),R.style.MyDialog);
-        dialog.setContentView(R.layout.dialog_default);
-        dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setCancelable(true);
-        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+        hongbaoDia=new Dialog(getContext(),R.style.MyDialog);
+
+        Window window=hongbaoDia.getWindow();
+        window.setContentView(R.layout.dialog_default);
+        window.setGravity(Gravity.CENTER);
+        hongbaoDia.setCanceledOnTouchOutside(true);
+        hongbaoDia.setCancelable(true);
+        WindowManager.LayoutParams lp = hongbaoDia.getWindow().getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        dialog.getWindow().setAttributes(lp);
-        dialog.show();
+        hongbaoDia.getWindow().setAttributes(lp);
+        hongbaoDia.show();
+        closeDia=(Button)window.findViewById(R.id.close);
+        openRedvelet=(ImageButton)window.findViewById(R.id.open_btn);
+        closeDia.setOnClickListener(this);
+        openRedvelet.setOnClickListener(this);
+
     }
 //完成回掉
 

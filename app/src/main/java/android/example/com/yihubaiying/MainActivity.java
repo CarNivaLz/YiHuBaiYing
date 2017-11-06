@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int RC_CAMERA = 2333;
     private RadioGroup radioGroup;
     private RadioButton radio_hongBaoMap,radio_tongXunLu,radio_woDe,radio_youYiSi;
+    private static MainActivity instance;
 
     private Fragment fragment_HongBaoMap,fragment_TongXunLu,fragment_WoDe,fragment_YouYiSi;
 //    private List<Fragment> fragmentList;
@@ -57,7 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView();
     }
 
-
+    public static MainActivity getInstance() {
+        return instance;
+    }
 
     private void initView(){
         frameLayout=(FrameLayout)findViewById(R.id.framelayout);
