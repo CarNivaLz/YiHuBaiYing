@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:http="http://schemas.android.com/apk/res-auto"
-
     package="android.example.com.yihubaiying">
-
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -20,13 +18,11 @@
 
     <application
         android:allowBackup="true"
-
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="0e78fb8ed8da723a58662a7608abe629" />
@@ -38,10 +34,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-                <activity android:name=".activity.HongBaoActivity"/>
-        <service android:name="com.amap.api.location.APSService" ></service>
+        <activity android:name=".activity.HongBaoActivity" />
 
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity android:name=".activity.Main2Activity" />
+        <activity android:name=".activity.pickpeople_activity"></activity>
     </application>
-
 
 </manifest>

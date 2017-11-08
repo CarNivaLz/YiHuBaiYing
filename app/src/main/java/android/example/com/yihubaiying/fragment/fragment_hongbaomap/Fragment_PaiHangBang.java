@@ -26,11 +26,11 @@ public class Fragment_PaiHangBang extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.frag_paihangbang,container,false);
         initRank();
-//        RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.recycleview);
-//        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
-//        recyclerView.setLayoutManager(layoutManager);
-//        RankAdapter adapter=new RankAdapter(R.layout.rank_layout,rankItemList);
-//        recyclerView.setAdapter(adapter);
+        RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.rank_recycleview);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        RankAdapter adapter=new RankAdapter(R.layout.rank_layout,rankItemList);
+        recyclerView.setAdapter(adapter);
         return view;
     }
 

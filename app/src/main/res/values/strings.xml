@@ -3,7 +3,7 @@
     <string name="infowindow_detail">详细</string>
     <string name="infowindow_last">忽略</string>
     <string name="agent_title">来自：%1$s</string>
-<string name="agent_message">内容：%1$s</string>
+    <string name="agent_message">内容：%1$s</string>
 
     <string name="notifyTitle">提示</string>
     <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
