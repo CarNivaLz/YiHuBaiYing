@@ -28,15 +28,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //banner
-    
-
-
-    
-
 
     compile'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    
+
     compile'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
