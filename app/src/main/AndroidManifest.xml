@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:http="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     package="android.example.com.yihubaiying">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,6 +18,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
+        tools:replace="android:icon"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -40,7 +42,7 @@
 
         <activity android:name=".activity.Main2Activity" />
         <activity android:name=".activity.pickpeople_activity" />
-        <activity android:name=".activity.redpacketdetail_activity"></activity>
+        <activity android:name=".activity.redpacketdetail_activity" />
     </application>
 
 </manifest>
