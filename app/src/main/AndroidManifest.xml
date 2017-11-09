@@ -18,13 +18,13 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
-        tools:replace="android:icon"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:replace="android:icon">
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="0e78fb8ed8da723a58662a7608abe629" />
@@ -43,6 +43,7 @@
         <activity android:name=".activity.Main2Activity" />
         <activity android:name=".activity.pickpeople_activity" />
         <activity android:name=".activity.redpacketdetail_activity" />
+        <activity android:name=".activity.Newsdetail_activity"></activity>
     </application>
 
 </manifest>
