@@ -24,7 +24,6 @@ import java.util.List;
 
 public class Fragment_DongTai extends Fragment implements View.OnClickListener{
     private List<DongtaiItem> dongtaiItemList=new ArrayList<>();
-    GoodView mGoodView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,9 +35,6 @@ public class Fragment_DongTai extends Fragment implements View.OnClickListener{
         recyclerView.setLayoutManager(layoutManager);
         DongtaiAdapter adapter=new DongtaiAdapter(R.layout.dontai_layout,dongtaiItemList);
         recyclerView.setAdapter(adapter);
-        mGoodView=new GoodView(getContext());
-
-        
         return view;
 
     }
