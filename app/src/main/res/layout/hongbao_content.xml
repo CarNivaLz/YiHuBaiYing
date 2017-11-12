@@ -2,20 +2,179 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
+    android:layout_height="match_parent"
+    android:background="#dbdbdb">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:background="@color/red"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:text="一呼百应"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="20dp"
+        android:background="@color/velet_red"></LinearLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/open_rp_top">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/back_hongbao"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:background="@color/transparent"
+                    android:src="@drawable/ic_back"
+                    android:layout_marginLeft="6dp"
+                    android:layout_gravity="center_vertical">
+
+                </ImageButton>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="11dp"
+                    android:background="@color/dark_gold">
+
+                </View>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="11dp"
+                    android:layout_gravity="center"
+                    android:text="红包详情"
+                    android:textColor="@color/dark_gold"
+                    android:textSize="19sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="见赏红包"
+                    android:textSize="29sp"
+                    android:textColor="@color/dark_gold"/>
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="14dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="中海左岸，十一国庆\n盛大开盘，回馈全城"
+            android:textColor="@color/red"
+            android:textSize="21sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="19dp"
+            android:layout_marginTop="10dp"
+            android:text="项目一期主推70-85m²通透两房,95-125m²全功能三房。\n项目位于天府核心地段,规划50万平商业集群,尊享便利生活。\n地铁4号线、9号线换乘站也将途径这里,双地铁直通城市繁华中心。附近有149路,154路,327路等多条公交线路,出行更加便捷。\n479中学尽在咫尺，两所名校可优先入学。"
+            android:textColor="@color/black_text2"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/hongbao_image1" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="0.4"></LinearLayout>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/hongbao_image2" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="0.4"></LinearLayout>
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:src="@drawable/hongbao_image3" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/random_get"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="42dp"
+                android:background="@drawable/btn_background"
+                android:text="随机领取"
+                android:textColor="@color/dark_gold"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/checkbox_hongbaocontent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+
+                <CheckedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="我已阅读并同意相关红包领取规则"
+                    android:textColor="#8a8a8a"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

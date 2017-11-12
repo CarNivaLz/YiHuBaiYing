@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">YiHuBaiYing</string>
-    <string name="infowindow_detail">详细</string>
-    <string name="infowindow_last">忽略</string>
     <string name="agent_title">来自：%1$s</string>
     <string name="agent_message">内容：%1$s</string>
 
@@ -20,6 +18,15 @@
     <string name="prompt_already_get_permission">have finished</string>
     <string name="prompt_been_denied">deny</string>
     <string name="snippet_demo">"电子科技大学附近锦绣花园二期开盘了！查看详细信息可以领取红包。"</string>
+
+
+    <string name="share_title">分享到</string>
+    <string name="moments">朋友圈</string>
+    <string name="wechat">微信好友</string>
+    <string name="weibo">新浪微博</string>
+    <string name="qq">QQ</string>
+    <string name="qzone">QQ空间</string>
+
 
     <string name="jrmf_send_rp_title">发红包</string>
     <string name="_bribery_message">恭喜发财，大吉大利！</string>
@@ -326,4 +333,5 @@
     <string name="jrmf_unbinding">解绑中...</string>
     <string name="loading">加载中...</string>
     <string name="waiting">请稍后...</string>
+
 </resources>
