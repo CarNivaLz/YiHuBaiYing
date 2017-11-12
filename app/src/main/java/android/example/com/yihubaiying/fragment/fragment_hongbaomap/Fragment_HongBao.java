@@ -1,7 +1,10 @@
 package android.example.com.yihubaiying.fragment.fragment_hongbaomap;
 
+
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.example.com.yihubaiying.MainActivity;
 import android.example.com.yihubaiying.R;
 import android.example.com.yihubaiying.activity.HongBaoActivity;
 import android.example.com.yihubaiying.adapter.MyInfoWinAdapter;
@@ -18,11 +21,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.maps.AMap.CancelableCallback;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
@@ -43,16 +49,13 @@ import com.yanzhenjie.permission.Permission;
 import com.yanzhenjie.permission.PermissionListener;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-
+import static android.example.com.yihubaiying.MainActivity.r;
 /**
  * Created by carnivalnian on 2017/10/21.
  */
@@ -61,7 +64,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         AMap.OnMarkerClickListener,
         View.OnClickListener,
         AMap.OnMapClickListener,
-        AMap.CancelableCallback,
+        CancelableCallback,
         AMap.OnInfoWindowClickListener,
         AMap.OnMapLongClickListener{
 
@@ -72,13 +75,16 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     private Banner banner;
     private AMap aMap;
     private TextureMapView mapView;
-    private LocationSource locationSource;
     private UiSettings uiSettings;
     private MyLocationStyle myLocationStyle;
     private Bitmap mBitmap;
 
     private TextView numHongbao;
+
     private ImageButton location_btn;
+
+
+
     private MyInfoWinAdapter adapter;
     private ArrayList<HongBao>hongBaoArrayList;
     private LatLng mineLatLng;
@@ -91,6 +97,9 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 
     private Marker sendMarker;
 
+    private Dialog hongbaoDia;
+    private ImageButton openRedvelet;
+    private Button closeDia;
 
     @Nullable
     @Override
@@ -130,10 +139,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         LayoutInflater inflater=(LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         markerView=inflater.inflate(R.layout.marker_redvelet,null);
         numHongbao =(TextView)markerView.findViewById(R.id.num_hongbao);
-
         location_btn=(ImageButton) view.findViewById(R.id.location_bt);
-
-
     }
 
     public void initBanner(View view){
@@ -166,8 +172,10 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         aMap.setOnMyLocationChangeListener(this);
         aMap.setOnMapClickListener(this);
         aMap.setOnMarkerClickListener(this);
-        location_btn.setOnClickListener(this);
         aMap.setOnInfoWindowClickListener(this);
+
+        location_btn.setOnClickListener(this);
+
 //视角
         aMap.setMinZoomLevel(15);
         aMap.setMaxZoomLevel(17);
@@ -202,7 +210,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
             //每次重新加载地图前，清除数据
             aMap.clear();
             markerLocal = null;
-            isAdded=false;
+        isAdded=false;
         }
         setUpMap();
     }
@@ -260,13 +268,13 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     public void onMyLocationChange(Location mylocation) {
         // 定位回调监听
         if(mylocation != null) {
-            Log.e("amapsssssssss", "onMyLocationChange 定位成功， lat: " + mylocation.getLatitude() + " lon: " + mylocation.getLongitude());
+            Log.e("amap", "onMyLocationChange 定位成功， lat: " + mylocation.getLatitude() + " lon: " + mylocation.getLongitude());
             Bundle bundle = mylocation.getExtras();
-            mineLatLng=new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
+             mineLatLng=new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
             if(isAdded==false) {
 
                 initHongbaoMarker(mylocation);
-                isAdded=true;
+               isAdded=true;
 
             }
             if(bundle != null) {
@@ -330,7 +338,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     }
 //   红包逻辑：
 
-    //    1、构造红包
+//    1、构造红包
 //                拿到位置
 //            构造随机红包位置信息
 //    传入参数
@@ -340,7 +348,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 //              view转化成bitmap
 //              改变bitmap大小
 //          }
-    //   添加红包
+ //   添加红包
 //    2、红包点击事件：
 //        a、根据位置画范围圈  onmylocationchange回掉时调用 有isadded判断
 //        b、显示infowindow
@@ -373,7 +381,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     public void initHongbaoMarker(Location location){
         if (aMap != null && location != null) {
             initTitleList();
-            Random r=new Random(1);
+
             mBitmap=convertViewToBitmap(markerView);
             for (int i=0;i<16;i++) {
                 LatLng latLng=new LatLng(location.getLatitude() + 0.001 * (r.nextInt(10) - 5), location.getLongitude() + 0.001 * (r.nextInt(10) - 5));
@@ -437,15 +445,26 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 
     @Override
     public void onClick(View v) {
-        if(v.getId()== R.id.location_bt) {
-            if (markerLocal != null) {
-                markerLocal.hideInfoWindow();
-                markerLocal = null;
-            }
-            changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                    mineLatLng, 17, 0, 0)),this);
-
+        switch (v.getId()){
+            case R.id.location_bt:
+                if(v.getId()==R.id.location_bt)
+                    if (markerLocal != null) {
+                        markerLocal.hideInfoWindow();
+                        markerLocal = null;
+                    }
+                changeCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                        mineLatLng, 17, 0, 0)),this);
+                break;
+            case R.id.open_btn:
+                startActivity(new Intent(getActivity(),HongBaoActivity.class));
+                hongbaoDia.dismiss();
+                break;
+            case R.id.close:
+                hongbaoDia.dismiss();
         }
+
+
+
 
     }
     @Override
@@ -456,14 +475,13 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
             circle.remove();
             markerLocal.hideInfoWindow();
             markerLocal=null;
-            //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
-            //隐藏篮圈 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_selected));
+
         }
 
     }
     @Override
     public void onMapLongClick(LatLng point){
-        sendMarker= aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f)
+       sendMarker= aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f)
                 .position(point)
                 .title("一呼百应 发布红包")
                 .snippet("您是否要在此处发布红包？编辑发布详细信息请点击窗口")
@@ -472,20 +490,20 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     }
 
     @Override
-    public void onInfoWindowClick(Marker marker){
+   public void onInfoWindowClick(Marker marker){
         if(marker == sendMarker){
             sendMarker.hideInfoWindow();
             sendMarker.remove();
 
         }else {
-            marker.hideInfoWindow();
-            circle.remove();
-            float distance = AMapUtils.calculateLineDistance(mineLatLng,marker.getPosition());
-            if(distance>300){
-                Toast.makeText(getContext(),"距离太远，您无法领取红包",Toast.LENGTH_SHORT).show();
-            }else {
-                showDialog();
-            }
+        marker.hideInfoWindow();
+        circle.remove();
+        float distance = AMapUtils.calculateLineDistance(mineLatLng,marker.getPosition());
+        if(distance>300){
+            Toast.makeText(getContext(),"距离太远，您无法领取红包",Toast.LENGTH_SHORT).show();
+        }else {
+            showDialog();
+        }
         }
     }
 
@@ -499,16 +517,23 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 
 
     private void showDialog() {
-        Dialog dialog=new Dialog(getContext(), R.style.MyDialog);
-        dialog.setContentView(R.layout.dialog_default);
-        dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setCancelable(true);
-        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+        hongbaoDia=new Dialog(getContext(),R.style.MyDialog);
+
+        Window window=hongbaoDia.getWindow();
+        window.setContentView(R.layout.dialog_default);
+        window.setGravity(Gravity.CENTER);
+        hongbaoDia.setCanceledOnTouchOutside(true);
+        hongbaoDia.setCancelable(true);
+        WindowManager.LayoutParams lp = hongbaoDia.getWindow().getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
-        dialog.getWindow().setAttributes(lp);
-        dialog.show();
+        hongbaoDia.getWindow().setAttributes(lp);
+        hongbaoDia.show();
+        closeDia=(Button)window.findViewById(R.id.close);
+        openRedvelet=(ImageButton)window.findViewById(R.id.open_btn);
+        closeDia.setOnClickListener(this);
+        openRedvelet.setOnClickListener(this);
+
     }
 //完成回掉
 
@@ -526,8 +551,8 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
                 .visible(true));
     }
 
-    private void changeCamera(CameraUpdate update, AMap.CancelableCallback callback) {
-        aMap.animateCamera(update, 200, callback);
+    private void changeCamera(CameraUpdate update, CancelableCallback callback) {
+            aMap.animateCamera(update, 200, callback);
     }
 
     private PermissionListener listener = new PermissionListener() {
@@ -536,7 +561,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
             // 权限申请成功回调。
             // 这里的requestCode就是申请时设置的requestCode。
             // 和onActivityResult()的requestCode一样，用来区分多个不同的请求。
-            if(AndPermission.hasPermission( getContext(), Permission.LOCATION)&&AndPermission.hasPermission( getContext(),Permission.STORAGE)) {
+            if(AndPermission.hasPermission( getContext(),Permission.LOCATION)&&AndPermission.hasPermission( getContext(),Permission.STORAGE)) {
                 if (requestCode == 200) {
 
                 }
