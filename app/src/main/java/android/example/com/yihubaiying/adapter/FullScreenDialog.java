@@ -1,32 +1,24 @@
-package android.example.com.yihubaiying.fragment;
+package android.example.com.yihubaiying.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.example.com.yihubaiying.MainActivity;
 import android.example.com.yihubaiying.R;
-import android.example.com.yihubaiying.activity.HongBaoActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageButton;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * Created by carnivalnian on 2017/11/1.
  */
 
-public class FullScreenDialog extends DialogFragment  {
+public class FullScreenDialog extends DialogFragment {
 
     private View view;
     private Context context;
@@ -43,7 +35,6 @@ public class FullScreenDialog extends DialogFragment  {
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialog);
         if (null == view) {
             view = LayoutInflater.from(context).inflate(R.layout.dialog_default, null);
-
         }
         builder.setView(view);
         return builder.create();
@@ -51,7 +42,6 @@ public class FullScreenDialog extends DialogFragment  {
 
     public void setContentView(View view) {
         this.view = view;
-
     }
 
     public View getContentView() {
@@ -74,6 +64,4 @@ public class FullScreenDialog extends DialogFragment  {
         mLayoutParams.gravity =gravity;
         mWindow.setAttributes(mLayoutParams);
     }
-
-
 }
