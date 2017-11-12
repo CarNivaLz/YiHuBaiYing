@@ -260,7 +260,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
     public void onMyLocationChange(Location mylocation) {
         // 定位回调监听
         if(mylocation != null) {
-            Log.e("amap", "onMyLocationChange 定位成功， lat: " + mylocation.getLatitude() + " lon: " + mylocation.getLongitude());
+            Log.e("amapsssssssss", "onMyLocationChange 定位成功， lat: " + mylocation.getLatitude() + " lon: " + mylocation.getLongitude());
             Bundle bundle = mylocation.getExtras();
             mineLatLng=new LatLng(mylocation.getLatitude(),mylocation.getLongitude());
             if(isAdded==false) {

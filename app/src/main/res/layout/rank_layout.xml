@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/rank_num"
         android:layout_marginLeft="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="10dp"
         android:layout_height="wrap_content"
         android:text="4"
         android:layout_gravity="center_vertical"/>
@@ -21,7 +21,7 @@
         android:id="@+id/rank_nickname"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:maxEms="5"
         android:text="北单高手在此"

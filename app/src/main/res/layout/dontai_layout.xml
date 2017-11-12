@@ -1,79 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android1="http://schemas.android.com/apk/res/android"
-    android1:layout_height="wrap_content"
-    android1:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
 
-    android1:layout_margin="5dp">
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <LinearLayout
-        android1:layout_marginTop="10dp"
-        android1:layout_width="match_parent"
-        android1:layout_height="wrap_content"
-        android1:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android1:id="@+id/dongtai_user"
-            android1:layout_marginLeft="10dp"
-            android1:layout_marginTop="10dp"
-            android1:layout_width="50dp"
-            android1:layout_height="50dp"
-            android1:src="@drawable/user_five"
-            />
+    <LinearLayout android:layout_height="130dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+
         <LinearLayout
-             android1:layout_marginLeft="10dp"
-            android1:layout_width="wrap_content"
-            android1:layout_height="wrap_content"
-            android1:orientation="vertical">
-            <TextView
-                android1:id="@+id/dongtai_nickname"
-                android1:layout_marginTop="2dp"
-                android1:layout_width="wrap_content"
-                android1:layout_height="wrap_content"
-                android1:text="昵称"
-                android1:textColor="#5B5B5B"
-                android1:textSize="20dp"
-                />
-            <TextView
-                android1:id="@+id/dongtai_miaoshu"
-                android1:layout_width="wrap_content"
-                android1:layout_height="wrap_content"
-                android1:layout_marginTop="5dp"
-                android1:text="中海国际新楼盘盛大开业，来者均有领大礼包，转发此条消息，可以享受购房八折优惠！~~"/>
-            <android.support.v7.widget.CardView
-                android1:layout_marginTop="20dp"
-                android1:layout_marginLeft="10dp"
-                android1:layout_marginRight="10dp"
-                android1:layout_marginBottom="10dp"
-                android1:layout_width="wrap_content"
-                android1:layout_height="100dp"
-                app:cardCornerRadius="4dp">
-                <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-                    android1:scaleType="center"
-                    android1:id="@+id/dongtai_image"
-                    android1:layout_width="match_parent"
-                    android1:layout_height="match_parent"
-                    android1:src="@drawable/apartment_adv"/>
-            </android.support.v7.widget.CardView>
-            <TextView
-                android1:id="@+id/dongtai_time"
-                android1:layout_marginTop="5dp"
-                android1:layout_marginRight="5dp"
-                android1:layout_width="wrap_content"
-                android1:layout_height="wrap_content"
-                android1:layout_gravity="bottom|right"
-                android1:text="15:36"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dongttai_image"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/user_eight"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp">
+                    <TextView
+                        android:id="@+id/dongtai_nickname"
+                        android:layout_weight="3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="追书首席打杂  lv.10"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/dongtai_time"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="三小时前"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/dongtai_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="[领取红包]我刚刚在这这里领取了大额的红包，赶快加入我把"
+                    android:textSize="16dp"
+                    android:textColor="#1C1C1C"/>
+
+                <TextView
+                    android:id="@+id/dongtai_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="我刚刚在这里领取了大额的红包。我就问你服不服。" />
+
+                <ImageView
+                    android:id="@+id/comment_good"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/good" />
+
+            </LinearLayout>
+
+
+
 
         </LinearLayout>
 
 
     </LinearLayout>
 
-
-
-
-
-
-</android.support.v7.widget.CardView>
+    <View  android:layout_height="1px"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:background="#CFCFCF"
+        />
+</LinearLayout>
