@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_common_item"
+        android:gravity="center_vertical"
+        android:padding="29px">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:src="@drawable/user_five"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:singleLine="true"
+                android:text="面对面建群"
+                android:textColor="@color/gray0"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:text="邀请身边的朋友一起来"
+              android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        style="@style/Line"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="20px"
+        />
+</LinearLayout>
