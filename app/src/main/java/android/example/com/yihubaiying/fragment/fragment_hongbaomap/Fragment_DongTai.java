@@ -11,6 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.wx.goodview.GoodView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +36,12 @@ public class Fragment_DongTai extends Fragment implements View.OnClickListener{
         DongtaiAdapter adapter=new DongtaiAdapter(R.layout.dontai_layout,dongtaiItemList);
         recyclerView.setAdapter(adapter);
         return view;
+
     }
 
     private void initDongtai() {
         for (int i=0;i<10;i++){
-            DongtaiItem dongtaiItem=new DongtaiItem("中海国际新楼盘盛大开业，来者均有领大礼包，转发此条消息，可以享受购房八折优惠！~~","中海国际", R.drawable.apartment_adv,"15:36", R.drawable.user_two);
+            DongtaiItem dongtaiItem=new DongtaiItem(R.drawable.user_nine,"追书首席打杂  lv.10","三小时前","[领取红包]我刚刚在这这里领取了大额的红包，赶快加入我把","我刚刚在这里领取了大额的红包。我就问你服不服。",R.drawable.good);
             dongtaiItemList.add(dongtaiItem);
 
         }
@@ -54,4 +58,5 @@ public class Fragment_DongTai extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
 
     }
+
 }

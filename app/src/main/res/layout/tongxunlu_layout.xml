@@ -3,21 +3,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="47dp"
-        android:background="@color/red"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:text="一呼百应"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-    </android.support.v7.widget.Toolbar>
+    android:layout_width="match_parent"
+    android:layout_height="47dp"
+    android:background="@color/red"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:text="一呼百应"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+</android.support.v7.widget.Toolbar>
+
+    <include layout="@layout/search_layout"/>
+
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:id="@+id/contact_recycleview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>

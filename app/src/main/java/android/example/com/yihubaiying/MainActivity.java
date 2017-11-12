@@ -1,33 +1,43 @@
 package android.example.com.yihubaiying;
 
+
 import android.Manifest;
 import android.example.com.yihubaiying.activity.BaseActivity;
+
+import android.content.Intent;
+import android.example.com.yihubaiying.activity.Main2Activity;
+
 import android.example.com.yihubaiying.fragment.Fragment_HongBaoMap;
 import android.example.com.yihubaiying.fragment.Fragment_TongXunLu;
 import android.example.com.yihubaiying.fragment.Fragment_WoDe;
 import android.example.com.yihubaiying.fragment.Fragment_YouYiSi;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.ViewHolder;
+
 import java.util.Random;
 
+
 public class MainActivity extends BaseActivity implements View.OnClickListener{
+
 
     private static final int RC_CAMERA = 2333;
     private RadioGroup radioGroup;
@@ -55,6 +65,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     }
 
     private void initView(){
+
+        FloatingActionButton floatingActionButton= (FloatingActionButton) findViewById(R.id.ibHome);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogPlus dialog=DialogPlus.newDialog(MainActivity.this).setContentHolder(new ViewHolder(R.layout.bottomdialog)).setGravity(Gravity.CENTER).setContentBackgroundResource(R.drawable.shape_corner).create();
+                ImageView ad= (ImageView) dialog.getHolderView().findViewById(R.id.adboard_icon);
+                ad.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(MainActivity.this, Main2Activity.class);
+                        startActivity(intent);
+                    }
+                });
+
+                ImageView findt= (ImageView) dialog.getHolderView().findViewById(R.id.findt_icon);
+                findt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(),"heihei",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.show();
+            }
+        });
+
+
         frameLayout=(FrameLayout)findViewById(R.id.framelayout);
         radioGroup=(RadioGroup) findViewById(R.id.radioGroup);
 
@@ -95,6 +132,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         //提交事务，否则事务不生效
         fragmentTransaction.commit();
     }
+
 
     @Override
     public void onClick(View v) {

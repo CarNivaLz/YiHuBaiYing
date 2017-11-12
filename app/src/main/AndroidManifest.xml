@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:http="http://schemas.android.com/apk/res-auto"
-
+    xmlns:tools="http://schemas.android.com/tools"
     package="android.example.com.yihubaiying">
-
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -20,16 +19,15 @@
 
     <application
         android:allowBackup="true"
-
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        tools:replace="android:icon">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="0e78fb8ed8da723a58662a7608abe629" />
+            android:value="e276da00da975076c827432d23128f2a" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -39,6 +37,7 @@
             </intent-filter>
         </activity>
 
+
         <activity android:name=".activity.HongBaoActivity"></activity>
         <activity android:name=".activity.RandomHongbaoActivity"></activity>
         <activity android:name=".activity.SelectHongbaoActivity"></activity>
@@ -47,7 +46,14 @@
 
         <service android:name="com.amap.api.location.APSService" ></service>
 
-    </application>
 
+        
+
+        <activity android:name=".activity.Main2Activity" />
+        <activity android:name=".activity.pickpeople_activity" />
+        <activity android:name=".activity.redpacketdetail_activity" />
+        <activity android:name=".activity.Newsdetail_activity" />
+        <activity android:name=".activity.pick_map"></activity>
+    </application>
 
 </manifest>

@@ -19,7 +19,7 @@ public class DongtaiAdapter extends BaseQuickAdapter<DongtaiItem,BaseViewHolder>
     }
 
     protected void convert(BaseViewHolder helper, DongtaiItem item) {
-        helper.setText(R.id.dongtai_miaoshu,item.getMiaoshu()).setText(R.id.dongtai_nickname,item.getNicheng()).setText(R.id.dongtai_time,item.getTime()).setImageResource(R.id.dongtai_image,item.getAdv_image()).setImageResource(R.id.dongtai_user,item.getImageId());
+        helper.setImageResource(R.id.dongttai_image,item.getUserImageId()).setText(R.id.dongtai_nickname,item.getNickname()).setText(R.id.dongtai_time,item.getTime()).setText(R.id.dongtai_title,item.getTitle()).setText(R.id.dongtai_content,item.getContent()).setImageResource(R.id.comment_good,item.getGoodImage());
 
     }
 }

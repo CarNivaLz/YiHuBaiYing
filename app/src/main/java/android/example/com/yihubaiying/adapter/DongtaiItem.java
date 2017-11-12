@@ -5,42 +5,38 @@ package android.example.com.yihubaiying.adapter;
  */
 
 public class DongtaiItem {
-    private String miaoshu;
-    private String nicheng;
-    private int adv_image;
+    private int userImageId;
+    private String nickname;
     private String time;
-    private int imageId;
+    private String title;
+    private String content;
 
-    public DongtaiItem(String miaoshu, String nicheng, int adv_image, String time, int imageId) {
-        this.miaoshu = miaoshu;
-        this.nicheng = nicheng;
-        this.adv_image = adv_image;
+
+    private int goodImage;
+
+    public DongtaiItem(int userImageId, String nickname, String time, String title, String content, int goodImage) {
+        this.userImageId = userImageId;
+        this.nickname = nickname;
         this.time = time;
-        this.imageId = imageId;
+        this.title = title;
+        this.content = content;
+        this.goodImage = goodImage;
     }
 
-    public String getMiaoshu() {
-        return miaoshu;
+    public int getUserImageId() {
+        return userImageId;
     }
 
-    public void setMiaoshu(String miaoshu) {
-        this.miaoshu = miaoshu;
+    public void setUserImageId(int userImageId) {
+        this.userImageId = userImageId;
     }
 
-    public String getNicheng() {
-        return nicheng;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNicheng(String nicheng) {
-        this.nicheng = nicheng;
-    }
-
-    public int getAdv_image() {
-        return adv_image;
-    }
-
-    public void setAdv_image(int adv_image) {
-        this.adv_image = adv_image;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getTime() {
@@ -51,11 +47,27 @@ public class DongtaiItem {
         this.time = time;
     }
 
-    public int getImageId() {
-        return imageId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getGoodImage() {
+        return goodImage;
+    }
+
+    public void setGoodImage(int goodImage) {
+        this.goodImage = goodImage;
     }
 }
