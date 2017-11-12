@@ -49,9 +49,11 @@ public class SelectHongbaoActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.zhuanfa_get:
                 startActivity(new Intent(this,ZhuanFaActivity.class));
+                AppManager.getAppManager().finishActivity(this);
                 break;
             case R.id.jiaqun_get:
                 startActivity(new Intent(this,JiaQunActivity.class));
+                AppManager.getAppManager().finishActivity(this);
                 break;
             case R.id.diaocha_get:
                 break;

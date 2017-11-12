@@ -26,7 +26,7 @@ import java.util.Random;
  */
 
 public class RandomHongbaoActivity extends BaseActivity implements View.OnClickListener {
-private boolean hasMoney=false;
+
 
     private Handler mViewHandler;
     private HandlerThread thread;
@@ -60,19 +60,17 @@ private boolean hasMoney=false;
         back_hongbaorandom.setOnClickListener(this);
     }
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mViewHandler.removeCallbacks(mTask);
         AppManager.getAppManager().finishActivity(this);
-        AppManager.getAppManager().finishActivity(ZhuanFaActivity.class);
-        AppManager.getAppManager().finishActivity(JiaQunActivity.class);
     }
 
     @Override
     public void onClick(View v){
         switch (v.getId()){
             case R.id.random_getget:
-
+                    mViewHandler.removeCallbacks(mTask);
                     startActivity(new Intent(this, SelectHongbaoActivity.class));
                     AppManager.getAppManager().finishActivity(this);
                 break;
@@ -104,6 +102,8 @@ private boolean hasMoney=false;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            money.clear();
+
             doIt(mTigerView5, time);
             try {
                 Thread.sleep(time);

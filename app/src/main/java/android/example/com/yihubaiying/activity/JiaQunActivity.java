@@ -99,8 +99,8 @@ public class JiaQunActivity extends BaseActivity implements View.OnClickListener
         if(v.getId()==R.id.jiaqun_jump){
             if(checkResult){
                 if(checkBox.isChecked()){
-                    startActivity(new Intent(this,RandomHongbaoActivity.class));
                     AppManager.getAppManager().finishActivity();
+                    Toast.makeText(JiaQunActivity.this,"加群成功",Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(this,"请您先阅读并同意《服务协议》和《隐私条款》",Toast.LENGTH_SHORT).show();
                 }
