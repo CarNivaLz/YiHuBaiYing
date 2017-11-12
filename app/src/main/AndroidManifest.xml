@@ -38,12 +38,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-                <activity android:name=".activity.HongBaoActivity">
 
-                </activity>
-        <activity android:name=".activity.RandomHongbaoActivity">
+        <activity android:name=".activity.HongBaoActivity"></activity>
+        <activity android:name=".activity.RandomHongbaoActivity"></activity>
+        <activity android:name=".activity.SelectHongbaoActivity"></activity>
+        <activity android:name=".activity.JiaQunActivity"></activity>
+        <activity android:name=".activity.ZhuanFaActivity"></activity>
 
-        </activity>
         <service android:name="com.amap.api.location.APSService" ></service>
 
     </application>

@@ -35,5 +35,12 @@ dependencies {
 
     compile 'com.yanzhenjie:permission:1.1.2'
 
-    compile 'nl.dionsegijn:konfetti:1.1.0'
+    //输入框edittext
+    compile 'com.hanks:lineheightedittext-library:1.0'
+    //底部分享弹出框
+    compile 'top.zibin:BottomDialog:1.0.5'
+    //滑动验证
+    compile 'com.github.mcxtzhang:SwipeCaptcha:V1.0.0'
+
+
 }

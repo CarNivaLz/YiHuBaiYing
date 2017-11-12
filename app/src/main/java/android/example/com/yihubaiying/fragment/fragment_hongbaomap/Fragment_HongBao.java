@@ -457,6 +457,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
                 break;
             case R.id.open_btn:
                 startActivity(new Intent(getActivity(),HongBaoActivity.class));
+                hongbaoDia.dismiss();
                 break;
             case R.id.close:
                 hongbaoDia.dismiss();
