@@ -62,4 +62,9 @@
         <color name="background">#f1f1f3</color>
         <color name="navpage">#FFE1E8EB</color>
 
+    <color name="dark_gold">#F5D399</color>
+
+    <color name="velet_red">#E54141</color>
+
+
 </resources>

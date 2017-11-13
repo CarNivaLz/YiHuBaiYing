@@ -916,10 +916,5 @@
             android:scaleType="centerCrop"
             android:src="@mipmap/send_icon" />
 
-
-
-
-
-
     </LinearLayout>
 </RelativeLayout>

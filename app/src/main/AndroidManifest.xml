@@ -27,7 +27,7 @@
         tools:replace="android:icon">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="0e78fb8ed8da723a58662a7608abe629" />
+            android:value="e276da00da975076c827432d23128f2a" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -36,14 +36,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.HongBaoActivity" />
+        <activity android:name=".activity.HongBaoActivity"></activity>
+        <activity android:name=".activity.RandomHongbaoActivity"></activity>
+        <activity android:name=".activity.SelectHongbaoActivity"></activity>
+        <activity android:name=".activity.JiaQunActivity"></activity>
+        <activity android:name=".activity.ZhuanFaActivity"></activity>
+
+        <service android:name="com.amap.api.location.APSService" ></service>
 
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name=".activity.Main2Activity" />
         <activity android:name=".activity.pickpeople_activity" />
         <activity android:name=".activity.redpacketdetail_activity" />
-        <activity android:name=".activity.Newsdetail_activity"></activity>
+        <activity android:name=".activity.Newsdetail_activity" />
     </application>
 
 </manifest>
