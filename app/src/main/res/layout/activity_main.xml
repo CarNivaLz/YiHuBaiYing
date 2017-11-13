@@ -120,7 +120,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="-65dp"
         android:layout_above="@id/radioGroup"
-        android:src="@drawable/selector_tab_yihubaiying"
+        android:background="@color/red"
+        android:src="@drawable/appicon"
         android:elevation="3dp"/>
 
     <!--<LinearLayout-->
