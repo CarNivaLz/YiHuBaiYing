@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:background="@color/velet_red"></LinearLayout>
+        android:background="@color/velet_red">
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -73,7 +74,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -90,23 +91,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="19dp"
             android:layout_marginRight="19dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="项目一期主推70-85m²通透两房,95-125m²全功能三房。\n项目位于天府核心地段,规划50万平商业集群,尊享便利生活。\n地铁4号线、9号线换乘站也将途径这里,双地铁直通城市繁华中心。附近有149路,154路,327路等多条公交线路,出行更加便捷。\n479中学尽在咫尺，两所名校可优先入学。"
             android:textColor="@color/black_text2"
-            android:textSize="17sp" />
+            android:textSize="19sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
+            android:layout_marginLeft="19dp"
+            android:layout_marginRight="19dp"
             android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="45dp"
-                android:layout_height="70dp"
+                android:layout_height="90dp"
                 android:layout_weight="1"
                 android:src="@drawable/hongbao_image1" />
 
@@ -117,7 +117,7 @@
 
             <ImageView
                 android:layout_width="45dp"
-                android:layout_height="70dp"
+                android:layout_height="90dp"
                 android:layout_weight="1"
                 android:src="@drawable/hongbao_image2" />
 
@@ -128,7 +128,7 @@
 
             <ImageView
                 android:layout_width="45dp"
-                android:layout_height="70dp"
+                android:layout_height="90dp"
                 android:layout_weight="1"
                 android:src="@drawable/hongbao_image3" />
 
@@ -137,43 +137,49 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/random_get"
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="42dp"
+                android:layout_marginTop="49dp"
                 android:background="@drawable/btn_background"
                 android:text="随机领取"
                 android:textColor="@color/dark_gold"
                 android:textSize="15sp" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:gravity="center_horizontal|bottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/checkbox_hongbaocontent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+        <CheckBox
+            android:id="@+id/checkbox_hongbaocontent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp" />
 
-                <CheckedTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="我已阅读并同意相关红包领取规则"
-                    android:textColor="#8a8a8a"
-                    android:textSize="12sp" />
-            </LinearLayout>
+        <CheckedTextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="我已阅读并同意相关红包领取规则"
+            android:textColor="#8a8a8a"
+            android:textSize="12sp" />
+    </LinearLayout>
+</RelativeLayout>
+
 
         </LinearLayout>
     </LinearLayout>

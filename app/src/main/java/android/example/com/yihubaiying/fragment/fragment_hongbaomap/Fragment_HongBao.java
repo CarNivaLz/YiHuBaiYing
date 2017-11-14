@@ -56,6 +56,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import static android.example.com.yihubaiying.MainActivity.r;
+import static com.amap.api.col.sl3.dj.m;
+
 /**
  * Created by carnivalnian on 2017/10/21.
  */
@@ -86,14 +88,13 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
 
 
     private MyInfoWinAdapter adapter;
-    private ArrayList<HongBao>hongBaoArrayList;
+    private ArrayList<HongBao>hongBaos;
     private LatLng mineLatLng;
     private View markerView;
     private Marker markerLocal;
 
 
     private Circle circle;
-    private LatLng hongbaoLatLng;
 
     private Marker sendMarker;
 
@@ -137,7 +138,7 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
          }*/
         initBanner(view);
         LayoutInflater inflater=(LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        markerView=inflater.inflate(R.layout.marker_redvelet,null);
+        markerView=inflater.inflate(R.layout.marker_hongbao,null);
         numHongbao =(TextView)markerView.findViewById(R.id.num_hongbao);
         location_btn=(ImageButton) view.findViewById(R.id.location_bt);
     }
@@ -360,21 +361,52 @@ public  class Fragment_HongBao extends LazyFragment implements AMap.OnMyLocation
         titleList.add("商家 中海国际");
         titleList.add("商家 川西坝子");
         titleList.add("商家 永辉超市");
+        titleList.add("商家 自然美理发");
+        titleList.add("商家 新起点教育");
+        titleList.add("商家 链家");
+        titleList.add("商家 KFC");
+        titleList.add("商家 快捷酒店");
+        titleList.add("商家 安杰电脑维修");
         titleList.add("用户 王三");
         titleList.add("用户 胡一菲");
         titleList.add("用户 飞翔的荷兰豆");
         titleList.add("用户 lypeer");
-        titleList.add("商家 安杰电脑维修");
         titleList.add("用户 电子科大杨伟豪");
         titleList.add("用户 李杰钰");
         titleList.add("用户 杨廷飞");
-        titleList.add("商家 自然美理发");
-        titleList.add("商家 中海国际");
-        titleList.add("商家 链家");
-        titleList.add("商家 KFC");
-        titleList.add("商家 快捷酒店");
+
 
     }
+    private ArrayList<String> snippetList=new ArrayList<>();
+    private void initSnipprtList(){
+        snippetList.add("中海左岸，十一国庆，盛大开盘，回馈全城");
+        snippetList.add("新店开张，全场八折，正宗火锅，畅享热辣");
+        snippetList.add("十一购物狂欢月，史上最大优惠，欢迎来购");
+        snippetList.add("新客户办卡优惠啦！满100赠20，满200赠50，更多优惠详见红包内容");
+        snippetList.add("名师汇聚，打造最强考研补习班，还等什么，赶快报名");
+        snippetList.add("还在为寻找优质二手房苦恼吗，快来链家，我们是专业的");
+        snippetList.add("TFBOYS代言，全新花生鸡排堡隆重上市，快来尝鲜");
+        snippetList.add("钟点房，日房开始优惠啦");
+        snippetList.add("电脑维修，安装固态，手机维修贴膜，认准安杰");
+        snippetList.add("重金求通信原理历年考试真题");
+        snippetList.add("失物寻找，一张饭卡胡一菲");
+        snippetList.add("寻找合租，坐标成都合院");
+        snippetList.add("求计院院花联系方式");
+        snippetList.add("寻找走失老人");
+        snippetList.add("招聘送餐兼职学生");
+
+    }
+    private void initHongbao(){
+        for (int i=0;i<16;i++){
+            HongBao mHongBao=new HongBao();
+            mHongBao.setId(i+1);
+            mHongBao.setNumber(88);
+            mHongBao.setTitle(titleList.get(i));
+            mHongBao.setSnippet(snippetList.get(i));
+
+        }
+    }
+
 
 
 

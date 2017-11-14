@@ -72,7 +72,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -85,19 +85,20 @@
             android:textSize="21sp" />
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="85dp"
         android:layout_gravity="center"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="60dp"
         android:orientation="horizontal">
 
         <android.example.com.yihubaiying.view.TigerMachineView
             android:id="@+id/t1"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="77dp"
             android:layout_weight="1"
             android:background="@color/velet_red"
             android:scaleType="fitStart" />
@@ -110,7 +111,7 @@
         <android.example.com.yihubaiying.view.TigerMachineView
             android:id="@+id/t2"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="77dp"
             android:layout_weight="1"
             android:background="@color/velet_red"
             android:scaleType="fitStart" />
@@ -123,14 +124,14 @@
         <android.example.com.yihubaiying.view.TigerMachineView
             android:id="@+id/t3"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="77dp"
             android:layout_weight="1"
             android:background="@color/velet_red"
             android:scaleType="fitStart" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="77dp"
             android:layout_weight="0.65">
 
             <ImageView
@@ -145,7 +146,7 @@
         <android.example.com.yihubaiying.view.TigerMachineView
             android:id="@+id/t4"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="77dp"
             android:layout_weight="1"
             android:background="@color/velet_red"
             android:scaleType="fitStart" />
@@ -160,7 +161,7 @@
         <android.example.com.yihubaiying.view.TigerMachineView
             android:id="@+id/t5"
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="77dp"
             android:layout_weight="1"
             android:background="@color/velet_red"
             android:scaleType="fitStart" />
@@ -204,6 +205,7 @@
             android:text="可以在我的红包中查看获得的红包金钱"
             android:textColor="@color/black_text2"
             android:textSize="13sp" />
+
     </LinearLayout>
 </LinearLayout>
 

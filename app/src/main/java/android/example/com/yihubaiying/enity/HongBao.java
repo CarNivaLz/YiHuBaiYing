@@ -9,57 +9,67 @@ import com.amap.api.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static android.R.attr.id;
+
 /**
  * Created by carnivalnian on 2017/10/29.
  */
 
 public class HongBao  {
-    private String title;
-    private String snipped;
-    private LatLng latLng;
-    private int number;
+
     private int id;
-    public static Random r=new Random(1);
+    private int number;
+    private String title;
+    private String snippet;
+    private String detail;
+    private int[] images;
 
-    public void setNumber(int number){
-        this.number=number;
-    }
-
-    public int getNumber(){
-        return number;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setSnipped(String snipped) {
-        this.snipped = snipped;
-    }
-
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public String getSnipped() {
-        return snipped;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public LatLng getLatLng() {
-        return latLng;
+    public String getSnippet() {
+        return snippet;
     }
 
-    public int getId() {
-        return id;
+    public void setSnippet(String snippet) {
+        this.snippet = snippet;
     }
 
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public int[] getImages() {
+        return images;
+    }
+
+    public void setImages(int[] images) {
+        this.images = images;
+    }
 
 }
